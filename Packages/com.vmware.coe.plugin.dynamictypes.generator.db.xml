@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<package>
+<description><![CDATA[Dynamic Types plugin generator bound to SQL database.]]></description>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='d070302e-21ed-43e6-b2e9-1b6bca133374'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='52d82b26-4142-44c4-87d6-3d26b2075502'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='ca57483e-7a3b-4934-9f81-1fa46ab61ffd'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='53a325f0-8a2a-4cea-82f6-c73e9e8fa93c'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='28ad3fb6-751e-4c8b-9766-6b21f64f9397'&dunesName='Action'&name='findById'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='7957965a-e4be-48f7-80b3-41c1312580c3'&dunesName='Action'&name='findAll'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='72edc9ce-aed5-4ccd-b66a-ba68f2f6cf66'&dunesName='Action'&name='hasChildrenInRelation'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='97dd5ba8-76c9-4e95-82a2-b1239f59b749'&dunesName='Action'&name='findRelation'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/ResourceElement?id='4373bb69-6879-46ae-914e-e6a38a209af3'&dunesName='ResourceElement']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='80c143ae-b6f6-4719-b1d2-eac887a2edad'&dunesName='Action'&name='getTypeDefinitionByName'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='691b2020-20d0-469a-9be3-a57937266c6a'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='de8d79fb-df5e-4c8f-b0d6-5f5b390370a0'&dunesName='Action'&name='getNamespaceByName'&category='com.vmware.o11n.plugin.dynamictypes.configuration']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='0ab65e69-f38d-4778-8cc3-e0b83b19ef10'&dunesName='Action'&name='getResourceElementByName'&category='com.vmware.o11n.plugin.dynamictypes.configuration']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='7423bf71-6109-457b-b8e9-f16f2f410b80'&dunesName='Action'&name='getPropertiesOfType'&category='com.vmware.o11n.plugin.dynamictypes.configuration']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='8B808080808080808080808080808080BB80808001297259131125b940b51f82d'&dunesName='Action'&name='setCustomProperty'&category='com.vmware.library.customProperties']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='8B8080808080808080808080808080802D80808001297259131125b940b51f82d'&dunesName='Action'&name='isPluginType'&category='com.vmware.library.customProperties']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='16195221-e759-4da0-9735-319f8d18545c'&dunesName='Action'&name='getAllTableColumnNamesForNamespaceDb'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='8B808080808080808080808080808080AF80808001297259131125b940b51f82d'&dunesName='Action'&name='getCustomProperty'&category='com.vmware.library.customProperties']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='717e7b12-4882-43a7-999f-7fc40aeb02da'&dunesName='Action'&name='getTableColumnNames'&category='com.vmware.coe.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='5b8ff1c1-7f21-442a-956b-f28599ec422c'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='dfd22ca2-98df-4367-b478-3a4c16f38467'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='ecf0e62c-589b-4969-aed0-625a2235b7df'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='5fa66c2a-3905-4fed-a8e5-566282fdd9c9'&dunesName='Action'&name='makeDynamicObjectFromProperties'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='e22f067b-adb8-4c53-b265-624ab1ac78ea'&dunesName='Action'&name='getObjectProperties'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='d223d3dc-d1e4-4216-9d59-5926fca0710d'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='f6b623df-fe28-4b58-b384-a8a0af01ac06'&dunesName='Action'&name='getAllTableNamesForNamespaceDb'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='f34e5ff8-fb41-4ad4-b2d8-bd74e54a982f'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='433b7e08-4e75-4efc-a019-2df32e317d04'&dunesName='Action'&name='isFolder'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Workflow?id='9f049933-603d-47cf-80c8-69446dc28532'&dunesName='Workflow']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='e9d87b56-26b7-47a1-8adc-c19f32756695'&dunesName='Action'&name='getChildType'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='52fd19ac-bb65-441b-a8f7-9152be8fec2b'&dunesName='Action'&name='getAllObjectsForTypeFromCache'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='c7b44554-05d1-4234-91f3-fc4c91afd5af'&dunesName='Action'&name='getFromCache'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='e89abefe-1129-4223-8167-cb02b44e8ae5'&dunesName='Action'&name='putInCache'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='318a1900-35a8-4393-812c-85e1124e0226'&dunesName='Action'&name='putAllObjectsForTypeInCache'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='ec43a718-9427-4c27-92d5-4f1fec3a49f3'&dunesName='Action'&name='putObjectInCache'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='3d276169-c9be-4cfc-a166-642302d02096'&dunesName='Action'&name='getObjectFromCache'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='423783a1-43ad-479a-be14-14badd373db8'&dunesName='Action'&name='getDbObject'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='731ac456-7435-4fbb-8596-f9cceeb90cb7'&dunesName='Action'&name='getParentObject'&category='com.vmware.coe.dynamicTypes.sql']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='5f7959bb-abb4-49c9-b5d6-c1050d81c973'&dunesName='Action'&name='getParentTypeDefinition'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='5f8ec5b5-25f9-44c8-8587-4a04653162e2'&dunesName='Action'&name='invalidateObject'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='3920723f-5472-47ad-8972-e408dbc62582'&dunesName='Action'&name='getObject'&category='com.vmware.coe.dynamicTypes']]></elm>
+<elm src-category='null'><![CDATA[dunes://service.dunes.ch/Action?id='6ae739ba-161c-423e-9810-a96208069deb'&dunesName='Action'&name='getAllTableNames'&category='com.vmware.library.sql.configuration']]></elm>
+<used-plugin name='DynamicTypes' version='1.3.6' />
+<used-plugin name='SQL' version='1.1.6' />
+</package>

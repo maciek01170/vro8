@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="ecf0e62c-589b-4969-aed0-625a2235b7df" editor-version="1.6" version="0.0.0" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Test findAll</display-name>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="type" type="string"/>
+    </input>
+    <output/>
+    <attrib name="assets" type="Array/DynamicTypes:XaasNas.Volume">
+        <value encoded="n">[]</value>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="45.40909090909091" x="384.5"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item0" type="task" comparator="0">
+        <display-name>findAll</display-name>
+        <script encoded="false">var startDate = new Date();
+
+System.debug("com.vmware.coe.dynamicTypes.sql/findAll - type :" + type);
+
+var namespace = type.split(".")[0];
+type = type.split(".")[1];
+var ns = DynamicTypesManager.getNamespace(namespace);
+var typeObj = DynamicTypesManager.getType(namespace,type);
+
+var sqlDb = System.getModule("com.vmware.library.customProperties").getCustomProperty(ns,"sqlDb");
+var sqlTableName = System.getModule("com.vmware.library.customProperties").getCustomProperty(typeObj,"tableName");
+var idField = System.getModule("com.vmware.library.customProperties").getCustomProperty(typeObj,"idField");
+var nameField = System.getModule("com.vmware.library.customProperties").getCustomProperty(typeObj,"nameField");
+
+var sqlTables = sqlDb.getTables();
+for each (table in sqlTables){
+	if (table.name == sqlTableName){
+		var sqlTable = table;
+		break;
+	}
+}
+if (!sqlTable) throw "cannot get table: " + sqlTableName;
+var columns = System.getModule("com.vmware.coe.sql").getTableColumnNames(sqlTableName,sqlDb);
+System.debug("Columns found: "+columns);
+
+var records = sqlTable.readRecords(null,false);
+System.debug("Records found: "+records.length);
+
+var objects = new Array();
+for each (var record in  records) {
+	var objProps = new Properties();
+	for each (field in columns){
+		if (field == idField){
+			objProps.put("id", record.getProperty(field));
+		}else if (field == nameField){
+			objProps.put("name", record.getProperty(field));
+		} else {
+			objProps.put(field, record.getProperty(field));
+		}
+	}
+	objects.push(System.getModule("com.vmware.coe.dynamicTypes").makeDynamicObjectFromProperties(namespace, type, objProps));
+}
+
+
+if (objects.length &gt;0) {
+	System.debug("Completed query in " + ((new Date()).getTime() - startDate.getTime()) / 1000 + " seconds");
+}
+System.debug(objects);
+//return objects; 	
+var assets = objects;
+System.debug("Assets = " + assets);
+for each (asset in assets) {
+    System.debug(" name " + asset.name + " =&gt; id = " + asset.id);
+} 
+System.debug("Object type: "+System.getObjectType(objects[0]));</script>
+        <in-binding>
+            <bind name="type" type="string" export-name="type"/>
+        </in-binding>
+        <out-binding>
+            <bind name="assets" type="Array/DynamicTypes:XaasNas.Volume" export-name="assets"/>
+        </out-binding>
+        <position y="60.0" x="201.0"/>
+    </workflow-item>
+</ns2:workflow>

@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="get_volume_fld" result-type="string" api-version="6.0.0" id="c8862ef9-bf05-4019-a6d1-61f42caa8e3a" version="0.0.0" category-name="ch.epfl.xaas.nas.objects">
+  <param n="volume" t="DynamicTypes:XaasNas.Volume"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[return volume.notificationMail;]]></script>
+</dunes-script-module>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="check_mails" result-type="string" api-version="6.0.0" id="15c74906-a7f1-414f-8bcc-ba93ea9761ef" version="0.0.0" category-name="ch.epfl.xaas.utils">
+  <description><![CDATA[Check the list of mails against ldap. 
+Returns empty string if everything is OK, error message (="Unknown mail ...") otherwise.]]></description>
+  <param n="mails" t="string"/>
+  <script encoded="false"><![CDATA[function checkMail(mail) {
+	if (!mail)
+		return false;
+	var users = System.getModule("ch.epfl.xaas.utils").search_ldap("(mail="+mail+")");
+    return users && users.getEntryCount() > 0;
+}
+
+var errors = []
+for each (var mail in mails.split(',')) {
+	mail= mail.trim();
+	if (mail && !checkMail(mail)) {
+		errors.push("Unknown mail '"+mail+"'");
+	}
+}
+
+if (errors) {
+	System.debug("errorMsg= "+errors.join(', '));
+}
+return errors? errors.join(', '): '']]></script>
+</dunes-script-module>

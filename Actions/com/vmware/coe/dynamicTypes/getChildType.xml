@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getChildType" result-type="string" api-version="6.0.0" id="e9d87b56-26b7-47a1-8adc-c19f32756695" version="1.0.0" allowed-operations="evf" category-name="com.vmware.coe.dynamicTypes">
+  <param n="parentType" t="string"><![CDATA[]]></param>
+  <param n="parentId" t="string"><![CDATA[]]></param>
+  <param n="relationName" t="string"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[var allRelations = DynamicTypesManager.getAllRelations();
+for each (var relation in allRelations) {
+	if (relationName == "namespace-children" && relation.parentType == parentId) return parentId;
+	if (relation.name == relationName && relation.parentType == parentType) return relation.childType;
+}	
+]]></script>
+</dunes-script-module>

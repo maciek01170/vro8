@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="get_configuration" result-type="Properties" api-version="6.0.0" id="38c119d5-9b5b-4e55-acde-a7b2421b4149" version="0.0.0" category-name="ch.epfl.xaas.utils">
+  <description><![CDATA[get configuration element properties with given path and name, e.g. ch.epfl.iaas.config + LdapConfig as Properties()]]></description>
+  <param n="categoryPath" t="string"><![CDATA[]]></param>
+  <param n="elementName" t="string"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[var conf= null;
+
+try {
+	conf = Server.getConfigurationElementCategoryWithPath(categoryPath).configurationElements.filter ( function (cec) { return cec.name == elementName } )[0];
+	if (conf == null)
+		return null;
+} catch (err) {
+}
+System.log(conf)
+// transform conf.attributes to properties using reduce. Functional in JS is cool :)
+var result= conf.attributes.reduce(function(r, e) { r[e.name] = e.value; return r }, new Properties());
+return result;]]></script>
+</dunes-script-module>

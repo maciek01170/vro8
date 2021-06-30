@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="send_mail" result-type="void" api-version="6.0.0" id="258d697a-8836-4fb4-9ebd-13b97676f5d3" version="0.0.0" category-name="ch.epfl.xaas.utils">
+  <description><![CDATA[send mail with standard (exhaustive) parameters]]></description>
+  <param n="fromAddress" t="string"><![CDATA[]]></param>
+  <param n="toAddress" t="string"><![CDATA[]]></param>
+  <param n="ccAddress" t="string"><![CDATA[]]></param>
+  <param n="subject" t="string"><![CDATA[]]></param>
+  <param n="content" t="string"><![CDATA[]]></param>
+  <param n="attachements" t="Array/MimeAttachment"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[var config = System.getModule("ch.epfl.xaas.utils").get_configuration("ch.epfl.iaas.config", "MailConfig");
+
+var message = new EmailMessage();
+
+message.smtpHost = config["smtpHost"];
+message.smtpPort = config["smtpPort"];
+message.username = config["username"];
+message.password = config["password"];
+message.fromName = config["fromName"];
+message.useSsl = config["useSsl"];
+message.useStartTls = config["useStartTls"];
+
+message.fromAddress = fromAddress || config["fromAddress"];
+message.toAddress = toAddress;
+if (ccAddress) 
+	message.ccAddress = ccAddress;
+message.subject = subject;
+message.addMimePart(content,"text/plain; charset=UTF-8");
+if (attachements)
+	for each (attachement in attachements) {
+		message.addMimePart(attachement, attachement.mimeType);
+	}
+
+System.debug("mail"+
+	"\nFrom: "+message.fromAddress+
+	"\nTo: "+toAddress+
+	(ccAddress ? "\nCc: "+ccAddress : '') +
+	"\nSubject: "+subject+
+	"\n----------------------"+
+	"\n"+content+
+	"\n/mail"
+);
+
+var nbAttempts = 3;
+var mailSent = false;
+var mailError = ''
+
+while (nbAttempts-- > 0 && !mailSent) {
+	System.debug(" Attempt # " + nbAttempts);
+	try {
+		message.sendMessage();
+		mailSent = true;
+	} catch (e) {
+		mailError = e;
+		// System.debug("Exception during send: '" + e + "'");
+	}
+	if (mailSent) {
+		break;
+	}
+	System.sleep(1000);
+}
+
+if (!mailSent) {
+	throw "Cannot send mail to '" + toAddress + "', on '" + subject + "'" + (mailError?  (" (" + mailError + ")") : "") ;
+}
+]]></script>
+</dunes-script-module>

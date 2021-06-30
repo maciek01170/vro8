@@ -1,0 +1,1 @@
+{"layout":{"pages":[{"id":"page_1","title":"General","sections":[{"id":"section_0","fields":[{"id":"type","display":"textField"}]}]}]},"schema":{"type":{"type":{"dataType":"string","isMultiple":false},"label":"type","id":"type","constraints":{}}},"itemId":""}

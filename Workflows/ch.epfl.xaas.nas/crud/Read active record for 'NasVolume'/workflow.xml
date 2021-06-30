@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item2" object-name="workflow:name=generic" id="10bcf9d7-5a66-4257-a0b0-7529164a19c7" editor-version="1.6" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Read active record for 'NasVolume'</display-name>
+    <description>Reads volume(s) matching all provided fields but empty from database.</description>
+    <position y="20.0" x="180.0"/>
+    <input>
+        <param name="volType" type="string">
+            <description>Voltype</description>
+        </param>
+        <param name="volId" type="string"/>
+        <param name="volName" type="string">
+            <description>Volname</description>
+        </param>
+        <param name="deploymentTag" type="string">
+            <description>Deploymenttag</description>
+        </param>
+        <param name="requestor" type="string">
+            <description>Requestor</description>
+        </param>
+        <param name="notificationMail" type="string">
+            <description>Notificationmail</description>
+        </param>
+        <param name="reasonsForRequest" type="string">
+            <description>Reasonsforrequest</description>
+        </param>
+        <param name="createdOn" type="Date">
+            <description>Createdon</description>
+        </param>
+        <param name="bgName" type="string">
+            <description>Bgname</description>
+        </param>
+        <param name="accessProtocol" type="string">
+            <description>Accessprotocol</description>
+        </param>
+        <param name="webdavAccess" type="string">
+            <description>Webdavaccess</description>
+        </param>
+        <param name="backupPlan" type="string">
+            <description>Backupplan</description>
+        </param>
+        <param name="targetEnv" type="string">
+            <description>Targetenv</description>
+        </param>
+        <param name="targetTenant" type="string">
+            <description>Targettenant</description>
+        </param>
+        <param name="vServer" type="string">
+            <description>Vserver</description>
+        </param>
+        <param name="isUnique" type="boolean">
+            <description>Defines if unique result is expected.</description>
+        </param>
+    </input>
+    <output>
+        <param name="result" type="Array/SQL:ActiveRecord">
+            <description>A list of all records found.</description>
+        </param>
+    </output>
+    <attrib name="errorCode" type="String">
+        <value encoded="n"/>
+        <description>errorCode</description>
+    </attrib>
+    <attrib name="table" type="SQL:Table" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="volumeTable">
+        <description>Reference to the Table object</description>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="150.0" x="180.0"/>
+    </workflow-item>
+    <workflow-item name="item1" throw-bind-name="errorCode" type="end" end-mode="1" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="90.0" x="340.0"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item0" catch-name="item1" throw-bind-name="errorCode" type="task" comparator="0">
+        <display-name>Scripting</display-name>
+        <script encoded="false">var columns = {
+volType : volType,
+volId: volId, 
+volName : volName,
+deploymentTag : deploymentTag,
+requestor : requestor,
+notificationMail : notificationMail,
+reasonsForRequest : reasonsForRequest,
+createdOn : createdOn,
+bgName : bgName,
+accessProtocol : accessProtocol,
+webdavAccess : webdavAccess,
+backupPlan : backupPlan,
+targetEnv : targetEnv,
+targetTenant : targetTenant,
+vServer : vServer
+};
+result = table.readRecords(columns, isUnique);
+
+System.log(result.length + " records found from " + table.name);
+</script>
+        <in-binding>
+            <bind name="volType" type="string" export-name="volType">
+                <description>Voltype</description>
+            </bind>
+            <bind name="volName" type="string" export-name="volName">
+                <description>Volname</description>
+            </bind>
+            <bind name="deploymentTag" type="string" export-name="deploymentTag">
+                <description>Deploymenttag</description>
+            </bind>
+            <bind name="requestor" type="string" export-name="requestor">
+                <description>Requestor</description>
+            </bind>
+            <bind name="notificationMail" type="string" export-name="notificationMail">
+                <description>Notificationmail</description>
+            </bind>
+            <bind name="reasonsForRequest" type="string" export-name="reasonsForRequest">
+                <description>Reasonsforrequest</description>
+            </bind>
+            <bind name="createdOn" type="Date" export-name="createdOn">
+                <description>Createdon</description>
+            </bind>
+            <bind name="bgName" type="string" export-name="bgName">
+                <description>Bgname</description>
+            </bind>
+            <bind name="accessProtocol" type="string" export-name="accessProtocol">
+                <description>Accessprotocol</description>
+            </bind>
+            <bind name="webdavAccess" type="string" export-name="webdavAccess">
+                <description>Webdavaccess</description>
+            </bind>
+            <bind name="backupPlan" type="string" export-name="backupPlan">
+                <description>Backupplan</description>
+            </bind>
+            <bind name="targetEnv" type="string" export-name="targetEnv">
+                <description>Targetenv</description>
+            </bind>
+            <bind name="targetTenant" type="string" export-name="targetTenant">
+                <description>Targettenant</description>
+            </bind>
+            <bind name="vServer" type="string" export-name="vServer">
+                <description>Vserver</description>
+            </bind>
+            <bind name="isUnique" type="boolean" export-name="isUnique">
+                <description>Defines if unique result is expected.</description>
+            </bind>
+            <bind name="table" type="SQL:Table" export-name="table"/>
+            <bind name="volId" type="string" export-name="volId"/>
+        </in-binding>
+        <out-binding>
+            <bind name="result" type="Array/SQL:ActiveRecord" export-name="result">
+                <description>A list of all records found.</description>
+            </bind>
+        </out-binding>
+        <position y="100.0" x="140.0"/>
+    </workflow-item>
+</ns2:workflow>

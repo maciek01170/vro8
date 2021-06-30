@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item4" object-name="workflow:name=generic" id="9f049933-603d-47cf-80c8-69446dc28532" editor-version="1.6" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Test Get Column Names</display-name>
+    <description>This is a test workflow to confirm that the getTableColumnNames action is working properly.</description>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="tableName" type="string"/>
+        <param name="sqlDb" type="SQL:Database"/>
+    </input>
+    <output>
+        <param name="columnNames" type="Array/string"/>
+    </output>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="440.0"/>
+    </workflow-item>
+    <workflow-item name="item4" out-name="item0" type="task" script-module="com.vmware.coe.sql/getTableColumnNames" comparator="0">
+        <display-name>getTableColumnNames</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.coe.sql").getTableColumnNames(tableName,sqlDb);
+</script>
+        <in-binding>
+            <bind name="tableName" type="string" export-name="tableName">
+                <description></description>
+            </bind>
+            <bind name="sqlDb" type="SQL:Database" export-name="sqlDb">
+                <description></description>
+            </bind>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="Array/string" export-name="columnNames"/>
+        </out-binding>
+        <description>Add a note to the workflow schema.</description>
+        <position y="60.0" x="300.0"/>
+    </workflow-item>
+</ns2:workflow>

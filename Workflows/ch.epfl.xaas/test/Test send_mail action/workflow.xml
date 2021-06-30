@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item2" object-name="workflow:name=generic" id="3d2844af-7427-46e2-b9f4-d07eb9dd1b7d" editor-version="2.0" version="0.0.0" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Test send_mail action</display-name>
+    <description>Playground for sending mails from vRO</description>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="toAddress" type="string"/>
+        <param name="ccAddress" type="string"/>
+        <param name="subject" type="string"/>
+        <param name="content" type="string"/>
+    </input>
+    <output/>
+    <attrib name="attachements" type="Array/MimeAttachment">
+        <value encoded="n">[]</value>
+        <description>mail content with sample csv file</description>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="570.0"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item4" type="task" comparator="0">
+        <display-name>Generate CSV attachement</display-name>
+        <script encoded="false">var csv = 
+//   '\n#"vmName"," owner UPN"," business group"," power status'
+  '\n#vmName,owner UPN,business group,power status"'
++ '\n"cp-parent-8112fb08-720b-48e7-bcff-47666eaa03f9","","","running"'
++ '\n"cp-parent-e7bc408e-a948-41ea-abe2-f1e1a2f588f7","","","running"'
++ '\n"def_master_RHEL7-64-INJ","","","stopped"'
++ '\n"itstxaas0593","itadmin-jdemierr@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas0596","AD287304@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas0658","itadmin-pbeaud@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas1013","itadmin-jdemierr@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas1014","itadmin-jdemierr@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas1052","itadmin-krejci@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas1065","itadmin-pbeaud@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas1072","itadmin-krejci@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas1090","krejci@intranet.epfl.ch","itst_xaas","running"'
++ '\n"itstxaas1096","itadmin-jdemierr@intranet.epfl.ch","itst_xaas","running"'
++ '\n"sitvm0059","chaboude@intranet.epfl.ch","epfl_si_idev_ing","running"'
++ '\n"sitvm0060","itadmin-macowicz@intranet.epfl.ch","epfl_si_exapp","running"'
+
+attachements = [new MimeAttachment()];
+attachements[0].name = 'Vms.csv';
+attachements[0].mimeType = 'text/csv';
+attachements[0].content = csv;
+
+
+
+</script>
+        <in-binding/>
+        <out-binding>
+            <bind name="attachements" type="Array/MimeAttachment" export-name="attachements"/>
+        </out-binding>
+        <description>Simple task with custom script capability.</description>
+        <position y="60.0" x="245.0"/>
+    </workflow-item>
+    <workflow-item name="item4" out-name="item0" type="task" script-module="ch.epfl.xaas.utils/send_mail" comparator="0">
+        <display-name>send_mail</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("ch.epfl.xaas.utils").send_mail(fromAddress,toAddress,ccAddress,subject,content,attachements);
+</script>
+        <in-binding>
+            <bind name="fromAddress" type="string" export-name="">
+                <description></description>
+            </bind>
+            <bind name="toAddress" type="string" export-name="toAddress">
+                <description></description>
+            </bind>
+            <bind name="ccAddress" type="string" export-name="ccAddress">
+                <description></description>
+            </bind>
+            <bind name="subject" type="string" export-name="subject">
+                <description></description>
+            </bind>
+            <bind name="content" type="string" export-name="content">
+                <description></description>
+            </bind>
+            <bind name="attachements" type="Array/MimeAttachment" export-name="attachements">
+                <description></description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Add a note to the workflow schema.</description>
+        <position y="60.0" x="360.0"/>
+    </workflow-item>
+</ns2:workflow>

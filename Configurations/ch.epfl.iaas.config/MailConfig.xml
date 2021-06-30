@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config-element id="f6340a12-770a-4ec5-a04f-ad9cf3444b4f" version="0.0.0">
+  <display-name><![CDATA[MailConfig]]></display-name>
+  <description><![CDATA[Mail parameters for XaaS]]></description>
+  <atts>
+    <att name="smtpHost" type="string" read-only="false">
+      <value encoded="n"><![CDATA[mail.epfl.ch]]></value>
+      <description><![CDATA[SMTP server name]]></description>
+    </att>
+    <att name="smtpPort" type="string" read-only="false">
+      <value encoded="n"><![CDATA[25]]></value>
+      <description><![CDATA[SMTP server port]]></description>
+    </att>
+    <att name="fromName" type="string" read-only="false">
+      <value encoded="n"><![CDATA[IaaS infrastructure]]></value>
+      <description><![CDATA["From" name for mails.]]></description>
+    </att>
+    <att name="fromAddress" type="string" read-only="false">
+      <value encoded="n"><![CDATA[noreply+iaas@epfl.ch]]></value>
+      <description><![CDATA["From" address for mails.]]></description>
+    </att>
+    <att name="useSsl" type="boolean" read-only="false">
+      <value encoded="n"><![CDATA[false]]></value>
+      <description><![CDATA[SMTP parameter]]></description>
+    </att>
+    <att name="useStartTls" type="boolean" read-only="false">
+      <value encoded="n"><![CDATA[false]]></value>
+      <description><![CDATA[SMTP parameter]]></description>
+    </att>
+    <att name="username" type="string" read-only="false">
+      <value encoded="n"><![CDATA[]]></value>
+      <description><![CDATA[SMTP server username]]></description>
+    </att>
+    <att name="password" type="string" read-only="false">
+      <value encoded="n"><![CDATA[]]></value>
+      <description><![CDATA[SMTP server password]]></description>
+    </att>
+  </atts>
+</config-element>

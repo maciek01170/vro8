@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="b786fc9c-4804-4a31-8864-b6823e8f50bf" editor-version="2.0" version="0.0.0" api-version="6.0.0" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Check IPs</display-name>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="IPsRoot" type="string">
+            <description>List of IPs with root access (separated by \n)</description>
+        </param>
+        <param name="IPsRO" type="string">
+            <description>List of IPs with RO access (separated by \n)</description>
+        </param>
+        <param name="IPsRW" type="string">
+            <description>List of IPs with RW access (separated by \n)</description>
+        </param>
+    </input>
+    <output>
+        <param name="IPsRW_value" type="string">
+            <description>Target list of IPs with RW access (separated by comma and passed to PS1)</description>
+        </param>
+        <param name="IPsRO_value" type="string">
+            <description>Target list of IPs with RO access (separated by comma and passed to PS1)</description>
+        </param>
+        <param name="IPsRoot_value" type="string">
+            <description>Target list of IPs with root access (separated by comma and passed to PS1)</description>
+        </param>
+    </output>
+    <attrib name="IPsRW_tmp" type="string">
+        <value encoded="n"></value>
+        <description></description>
+    </attrib>
+    <attrib name="IPsRO_tmp" type="string">
+        <value encoded="n"></value>
+        <description></description>
+    </attrib>
+    <attrib name="IPsRoot_tmp" type="string">
+        <value encoded="n"></value>
+        <description></description>
+    </attrib>
+    <attrib name="errorCode" type="string">
+        <value encoded="n"></value>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="620.0"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item2" type="task" script-module="ch.epfl.xaas.utils/get_valid_IPs" comparator="0">
+        <display-name>check Root</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+actionResult = System.getModule("ch.epfl.xaas.utils").get_valid_IPs(IPs);
+</script>
+        <in-binding>
+            <bind name="IPs" type="string" export-name="IPsRoot">
+                <description></description>
+            </bind>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="string" export-name="IPsRoot_tmp"/>
+        </out-binding>
+        <description>Add a note to the workflow schema.</description>
+        <position y="60.0" x="180.0"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item3" type="task" script-module="ch.epfl.xaas.utils/get_valid_IPs" comparator="0">
+        <display-name>check RO</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+actionResult = System.getModule("ch.epfl.xaas.utils").get_valid_IPs(IPs);
+</script>
+        <in-binding>
+            <bind name="IPs" type="string" export-name="IPsRO">
+                <description></description>
+            </bind>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="string" export-name="IPsRO_tmp"/>
+        </out-binding>
+        <description>Add a note to the workflow schema.</description>
+        <position y="60.0" x="275.0"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item4" type="task" script-module="ch.epfl.xaas.utils/get_valid_IPs" comparator="0">
+        <display-name>check RW</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+actionResult = System.getModule("ch.epfl.xaas.utils").get_valid_IPs(IPs);
+</script>
+        <in-binding>
+            <bind name="IPs" type="string" export-name="IPsRW">
+                <description></description>
+            </bind>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="string" export-name="IPsRW_tmp"/>
+        </out-binding>
+        <description>Add a note to the workflow schema.</description>
+        <position y="60.0" x="380.0"/>
+    </workflow-item>
+    <workflow-item name="item4" out-name="item0" throw-bind-name="errorCode" type="task" comparator="0">
+        <display-name>check error</display-name>
+        <script encoded="false"></script>
+        <in-binding/>
+        <out-binding/>
+        <description>Simple task with custom script capability.</description>
+        <position y="60.0" x="480.0"/>
+    </workflow-item>
+</ns2:workflow>

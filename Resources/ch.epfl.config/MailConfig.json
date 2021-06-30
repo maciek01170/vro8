@@ -1,0 +1,10 @@
+{
+  "smtpHost": "mail.epfl.ch",
+  "smtpPort": 25,
+  "fromName": "XaaS Infrastructure",
+  "fromAddress": "noreply+iaas@epfl.ch",
+  "useSsl": false,
+  "useStartTls": false,
+  "username": "",
+  "password": ""
+}

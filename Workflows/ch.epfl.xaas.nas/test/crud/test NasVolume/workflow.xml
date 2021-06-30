@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item3" object-name="workflow:name=generic" id="398a1de5-cf33-4560-ba4d-efd8f822177b" editor-version="2.0" version="0.0.0" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+    <display-name>test NasVolume</display-name>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="volType" type="string">
+            <description>Volume type</description>
+        </param>
+        <param name="volId" type="string">
+            <description>Volume Id</description>
+        </param>
+        <param name="volName" type="string">
+            <description>Volume Name</description>
+        </param>
+        <param name="deploymentTag" type="string">
+            <description>Environment</description>
+        </param>
+        <param name="requestor" type="string"/>
+        <param name="notificationMail" type="string"/>
+        <param name="reasonsForRequest" type="string"/>
+        <param name="bgName" type="string"/>
+        <param name="access" type="string"/>
+        <param name="webdavAccess" type="boolean"/>
+        <param name="svm" type="string"/>
+        <param name="bgId" type="string"/>
+        <param name="targetTenant" type="string"/>
+    </input>
+    <output/>
+    <attrib name="volumeArchiveTable" type="SQL:Table" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="volumeArchiveTable"/>
+    <attrib name="isUnique" type="boolean">
+        <value encoded="n">true</value>
+    </attrib>
+    <attrib name="cols" type="Any">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="createdOn" type="Date">
+        <value encoded="n">20210507143200000+0000</value>
+    </attrib>
+    <attrib name="targetEnv" type="string" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="targetEnv"/>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="500.0"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item0" type="link" linked-workflow-id="e3b2fee5-6ba6-4594-a2b3-463dc2361cae" comparator="0">
+        <display-name>Create active record for 'NasVolume'</display-name>
+        <script encoded="false"></script>
+        <in-binding>
+            <bind name="volType" type="string" export-name="volType">
+                <description>Volume type</description>
+            </bind>
+            <bind name="volId" type="string" export-name="volId"/>
+            <bind name="volName" type="string" export-name="volName">
+                <description>Volume name</description>
+            </bind>
+            <bind name="deploymentTag" type="string" export-name="deploymentTag">
+                <description>Environment</description>
+            </bind>
+            <bind name="requestor" type="string" export-name="requestor">
+                <description>Requestor</description>
+            </bind>
+            <bind name="notificationMail" type="string" export-name="notificationMail">
+                <description>Notification mail</description>
+            </bind>
+            <bind name="reasonsForRequest" type="string" export-name="reasonsForRequest">
+                <description>Reason for request</description>
+            </bind>
+            <bind name="createdOn" type="Date" export-name="createdOn">
+                <description>Created on</description>
+            </bind>
+            <bind name="bgName" type="string" export-name="bgName">
+                <description>Business group</description>
+            </bind>
+            <bind name="access" type="string" export-name="access">
+                <description>Access protocol</description>
+            </bind>
+            <bind name="webdavAccess" type="boolean" export-name="webdavAccess">
+                <description>WebDAV access?</description>
+            </bind>
+            <bind name="backupPlan" type="string" export-name="">
+                <description>Backup plan</description>
+            </bind>
+            <bind name="targetEnv" type="string" export-name="targetEnv">
+                <description>Target NAS env.</description>
+            </bind>
+            <bind name="targetTenant" type="string" export-name="targetTenant">
+                <description>Target NAS tenant (same as vRA)</description>
+            </bind>
+            <bind name="svm" type="string" export-name="svm">
+                <description>vServer</description>
+            </bind>
+            <bind name="bgId" type="string" export-name="bgId"/>
+        </in-binding>
+        <out-binding>
+            <bind name="result" type="SQL:ActiveRecord" export-name="">
+                <description>Mapped record object to a database record.</description>
+            </bind>
+        </out-binding>
+        <description> </description>
+        <position y="60.0" x="280.0"/>
+    </workflow-item>
+</ns2:workflow>

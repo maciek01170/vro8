@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="search_ldap" result-type="Any" api-version="6.0.0" id="37e03d9a-61d0-4794-8bd4-3372de5ada05" version="0.0.0" category-name="ch.epfl.xaas.utils">
+  <description><![CDATA[search LDAP with parameters defined  in config. ch.epfl.iaas.config/LdapConfig.
+
+Use : 
+ - search : var se = System.getModule("ch.epfl.iaas.ldap").search_ldap(query);
+ - test if something found : (se != null && se.getEntryCount() > 0)
+ - access results : var entries= se.getSearchEntries();  var attrValue = entries[x].getAttributeValue("cn")
+]]></description>
+  <param n="query" t="string"/>
+  <script encoded="false"><![CDATA[var get_configuration = System.getModule("ch.epfl.xaas.utils").get_configuration;
+var config = get_configuration("ch.epfl.iaas.config", "LdapConfig");
+
+var ldapClient = LdapClientFactory.newLdapClient(config["host"], config["port"], config["bind_username"], config["bind_password"], false);
+
+var result = ldapClient.search(config["base"], LdapSearchScope.SUB, LdapDereferencePolicy.ALWAYS, 100, 100, query, null);
+System.log("got result = " + result)
+ldapClient.close();
+return result
+]]></script>
+</dunes-script-module>

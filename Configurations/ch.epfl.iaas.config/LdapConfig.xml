@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config-element id="3a8de840-e44e-41a4-a73d-aca7c292a50d" version="0.0.0">
+  <display-name><![CDATA[LdapConfig]]></display-name>
+  <description><![CDATA[LDAP parameters]]></description>
+  <atts>
+    <att name="host" type="string" read-only="false">
+      <value encoded="n"><![CDATA[ldap.epfl.ch]]></value>
+      <description><![CDATA[LDAP host]]></description>
+    </att>
+    <att name="port" type="string" read-only="false">
+      <value encoded="n"><![CDATA[389]]></value>
+      <description><![CDATA[LDAP port]]></description>
+    </att>
+    <att name="base" type="string" read-only="false">
+      <value encoded="n"><![CDATA[c=ch]]></value>
+      <description><![CDATA[LDAP root]]></description>
+    </att>
+    <att name="bind_username" type="string" read-only="false">
+      <value encoded="n"><![CDATA[]]></value>
+      <description><![CDATA[bind username if auth required for LDAP]]></description>
+    </att>
+    <att name="bind_password" type="string" read-only="false">
+      <value encoded="n"><![CDATA[]]></value>
+      <description><![CDATA[bind password if auth required for LDAP]]></description>
+    </att>
+  </atts>
+</config-element>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item3" object-name="workflow:name=generic" id="fd13ee23-462a-43a4-9d28-49376803d3b0" editor-version="1.6" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Delete active record for 'NasVolume'</display-name>
+    <description>Deletes given volume from database.</description>
+    <position y="20.0" x="180.0"/>
+    <input>
+        <param name="volume" type="DynamicTypes:XaasNas.Volume"/>
+    </input>
+    <output/>
+    <attrib name="errorCode" type="String">
+        <value encoded="n"/>
+        <description>errorCode</description>
+    </attrib>
+    <attrib name="volumeTable" type="SQL:Table" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="volumeTable">
+        <description>Reference to the Table object</description>
+    </attrib>
+    <attrib name="isUnique" type="boolean">
+        <value encoded="n">true</value>
+        <description>Defines if unique record should be found.</description>
+    </attrib>
+    <attrib name="volumeArchiveTable" type="SQL:Table" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="volumeArchiveTable"/>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="209.04545454545453" x="185.0"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item2" catch-name="item1" throw-bind-name="errorCode" type="task" comparator="0">
+        <display-name>volumeArchiveTable</display-name>
+        <script encoded="false">var cols = {
+	volId : volume.id,
+};
+var result = volumeArchiveTable.readRecords(cols, isUnique);
+if (result.length &lt; 1) {
+   System.error(volumeArchiveTable.name + ': no records found for volName = ' + volume.name);
+} else {
+	cols.deletedOn = new Date();
+	result = volumeArchiveTable.updateRecord(result[0], cols);
+	System.debug("Updated " + result + " record(s) in  " + volumeArchiveTable.name + "(volName = " + volume.name + ", volId = " + volume.id + ")");
+}
+</script>
+        <in-binding>
+            <bind name="isUnique" type="boolean" export-name="isUnique">
+                <description>Defines if unique record should be found.</description>
+            </bind>
+            <bind name="volume" type="DynamicTypes:XaasNas.Volume" export-name="volume"/>
+            <bind name="volumeArchiveTable" type="SQL:Table" export-name="volumeArchiveTable"/>
+        </in-binding>
+        <out-binding/>
+        <position y="100.0" x="140.0"/>
+    </workflow-item>
+    <workflow-item name="item1" throw-bind-name="errorCode" type="end" end-mode="1" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="90.86363636363636" x="344.5"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item0" catch-name="item1" throw-bind-name="errorCode" type="task" comparator="0">
+        <display-name>volumeTable</display-name>
+        <script encoded="false">var cols = {
+	volId : volume.id,
+};
+
+var result = volumeTable.deleteRecords(cols, isUnique);
+System.debug("Deleted " + result + " record(s) from  "+volumeTable.name);
+</script>
+        <in-binding>
+            <bind name="isUnique" type="boolean" export-name="isUnique">
+                <description>Defines if unique record should be found.</description>
+            </bind>
+            <bind name="volume" type="DynamicTypes:XaasNas.Volume" export-name="volume"/>
+            <bind name="volumeTable" type="SQL:Table" export-name="volumeTable"/>
+        </in-binding>
+        <out-binding/>
+        <position y="164.5" x="145.0"/>
+    </workflow-item>
+</ns2:workflow>

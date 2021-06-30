@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="validate_IP" result-type="string" api-version="6.0.0" id="835f1ed1-7555-4d69-b526-684e6c712da9" version="0.0.0" category-name="ch.epfl.xaas.utils">
+  <description><![CDATA[Validates IP address. Returns empy string if IP is valid, errors otherwise]]></description>
+  <param n="IPs" t="string"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[var check = System.getModule("ch.epfl.xaas.utils").get_valid_IPs(IPs);
+if (check.indexOf('Error') >= 0)
+    return check
+return 'yes'
+]]></script>
+</dunes-script-module>

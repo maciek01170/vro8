@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getObjectFromCache" result-type="Any" api-version="6.0.0" id="3d276169-c9be-4cfc-a166-642302d02096" version="1.0.1" allowed-operations="evf" category-name="com.vmware.coe.dynamicTypes">
+  <param n="type" t="string"><![CDATA[]]></param>
+  <param n="id" t="string"><![CDATA[]]></param>
+  <param n="ttl" t="string"><![CDATA[Time in second. If object has been in cache for less than this time get it from cache]]></param>
+  <script encoded="false"><![CDATA[return System.getModule("com.vmware.coe.dynamicTypes").getFromCache(type + "." + id, ttl);]]></script>
+</dunes-script-module>

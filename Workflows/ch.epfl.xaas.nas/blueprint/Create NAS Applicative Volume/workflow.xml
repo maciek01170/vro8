@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="608d2ba5-02a5-44b7-b369-8f29c92e5e01" editor-version="2.0" version="0.0.0" api-version="6.0.0" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Create NAS Applicative Volume</display-name>
+    <description>XaaS NAS Applicative Volume creation</description>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="notificationMail" type="string">
+            <description>Notification mail passed from Cloud Assembly ('requestedFor')</description>
+        </param>
+        <param name="IPsRoot" type="string">
+            <description>List of IPs with root access (separated by \n)</description>
+        </param>
+        <param name="IPsRO" type="string">
+            <description>List of IPs with RO access (separated by \n)</description>
+        </param>
+        <param name="IPsRW" type="string">
+            <description>List of IPs with RW access (separated by \n)</description>
+        </param>
+        <param name="access" type="string"/>
+        <param name="targetTenant" type="string"/>
+        <param name="webdavAccess" type="boolean"/>
+        <param name="requestor" type="string"/>
+        <param name="bgName" type="string"/>
+        <param name="volName" type="string"/>
+        <param name="volId" type="string">
+            <description>volume Id required for handling DT (returned by PS1)</description>
+        </param>
+        <param name="reasonsForRequest" type="string"/>
+        <param name="deploymentTag" type="string"/>
+        <param name="bgId" type="string">
+            <description>Business Group Id</description>
+        </param>
+        <param name="svm" type="string"/>
+    </input>
+    <output>
+        <param name="volumeOut" type="DynamicTypes:XaasNas.Volume"/>
+    </output>
+    <attrib name="targetEnv" type="string" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="targetEnv"/>
+    <attrib name="volType" type="string">
+        <value encoded="n">app</value>
+        <description>Volume type: fixed to 'app' here</description>
+    </attrib>
+    <attrib name="backupPlan" type="string">
+        <value encoded="n">no_backup</value>
+        <description>Backup plan - placeholder for the moment</description>
+    </attrib>
+    <attrib name="volInfo" type="Any">
+        <value encoded="n"/>
+        <description>result from PS1</description>
+    </attrib>
+    <attrib name="bgInfo" type="Any">
+        <value encoded="n"/>
+        <description>Business Group Information from vRA</description>
+    </attrib>
+    <attrib name="errorCode" type="string">
+        <value encoded="n"></value>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="500.0"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item3" catch-name="item2" throw-bind-name="errorCode" type="task" comparator="0">
+        <display-name>check mails</display-name>
+        <script encoded="false">var mailValidation = System.getModule("ch.epfl.xaas.utils").check_mails(notificationMail) ;
+if (mailValidation !== '') 
+	throw "Error in notification mail: " + mailValidation;
+</script>
+        <in-binding>
+            <bind name="notificationMail" type="string" export-name="notificationMail"/>
+        </in-binding>
+        <out-binding/>
+        <description>Simple task with custom script capability.</description>
+        <position y="60.0" x="150.0"/>
+    </workflow-item>
+    <workflow-item name="item2" throw-bind-name="errorCode" type="end" end-mode="1" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="110.0" x="200.0"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item0" type="link" linked-workflow-id="1bc9b0ae-2a97-492d-b6b2-cc03d2f3c15a" comparator="0">
+        <display-name>Create DT Object</display-name>
+        <script encoded="false"></script>
+        <in-binding>
+            <bind name="access" type="string" export-name="access">
+                <description>Access protocol</description>
+            </bind>
+            <bind name="targetTenant" type="string" export-name="targetTenant">
+                <description>Target NAS tenant (same as vRA)</description>
+            </bind>
+            <bind name="webdavAccess" type="boolean" export-name="webdavAccess">
+                <description>WebDAV access?</description>
+            </bind>
+            <bind name="deploymentTag" type="string" export-name="deploymentTag">
+                <description>Environment</description>
+            </bind>
+            <bind name="requestor" type="string" export-name="requestor">
+                <description>Requestor</description>
+            </bind>
+            <bind name="notificationMail" type="string" export-name="notificationMail">
+                <description>Notification mail</description>
+            </bind>
+            <bind name="reasonsForRequest" type="string" export-name="reasonsForRequest">
+                <description>Reason for request</description>
+            </bind>
+            <bind name="bgName" type="string" export-name="bgName">
+                <description>Business group</description>
+            </bind>
+            <bind name="bgId" type="string" export-name="bgId"/>
+            <bind name="svm" type="string" export-name="svm">
+                <description>vServer</description>
+            </bind>
+            <bind name="volId" type="string" export-name="volId">
+                <description>volume Id required for handling DT</description>
+            </bind>
+            <bind name="volName" type="string" export-name="volName">
+                <description>Volume name returned by PS1</description>
+            </bind>
+            <bind name="targetEnv" type="string" export-name="targetEnv">
+                <description>Target NAS env.</description>
+            </bind>
+            <bind name="volType" type="string" export-name="volType">
+                <description>Volume type: fixed to 'col' here</description>
+            </bind>
+            <bind name="backupPlan" type="string" export-name="backupPlan">
+                <description>Backup plan (placeholder)</description>
+            </bind>
+        </in-binding>
+        <out-binding>
+            <bind name="volumeOut" type="DynamicTypes:XaasNas.Volume" export-name="volumeOut"/>
+        </out-binding>
+        <description> </description>
+        <position y="60.0" x="320.0"/>
+    </workflow-item>
+</ns2:workflow>

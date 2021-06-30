@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="ca57483e-7a3b-4934-9f81-1fa46ab61ffd" editor-version="1.6" version="0.0.2" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Define root db folder</display-name>
+    <description>Create 1 relation + 1 object definition
+</description>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="childType" type="DynamicTypes:DynamicTypeDefinition"/>
+        <param name="namespace" type="DynamicTypes:DynamicNamespaceDefinition"/>
+        <param name="typeName" type="string"/>
+    </input>
+    <output>
+        <param name="newFolder" type="DynamicTypes:DynamicTypeDefinition"/>
+    </output>
+    <attrib name="relationName" type="string">
+        <value encoded="n"></value>
+    </attrib>
+    <attrib name="generateWorkflowStubs" type="boolean">
+        <value encoded="n">false</value>
+    </attrib>
+    <attrib name="findByIdBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="findAllBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="hasChildrenInRelationBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="findRelationBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="findByIdBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='28ad3fb6-751e-4c8b-9766-6b21f64f9397'&amp;dunesName='Action'&amp;name='findById'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="findByIdBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="findAllBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='7957965a-e4be-48f7-80b3-41c1312580c3'&amp;dunesName='Action'&amp;name='findAll'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="findAllBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="hasChildrenInRelationBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='72edc9ce-aed5-4ccd-b66a-ba68f2f6cf66'&amp;dunesName='Action'&amp;name='hasChildrenInRelation'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="hasChildrenInRelationBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="findRelationBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='97dd5ba8-76c9-4e95-82a2-b1239f59b749'&amp;dunesName='Action'&amp;name='findRelation'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="findRelationBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="props" type="Array/string">
+        <value encoded="n">[]</value>
+    </attrib>
+    <attrib name="folderType" type="DynamicTypes:DynamicTypeDefinition">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="icon" type="ResourceElement">
+        <value encoded="n">dunes://service.dunes.ch/ResourceElement?id='4373bb69-6879-46ae-914e-e6a38a209af3'&amp;dunesName='ResourceElement'</value>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="45.40909090909091" x="944.5"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item6" type="link" linked-workflow-id="52d82b26-4142-44c4-87d6-3d26b2075502" comparator="0">
+        <display-name>Define Type</display-name>
+        <in-binding>
+            <bind name="namespace" type="DynamicTypes:DynamicNamespaceDefinition" export-name="namespace"/>
+            <bind name="typeName" type="string" export-name="typeName"/>
+            <bind name="icon" type="ResourceElement" export-name="icon"/>
+            <bind name="props" type="Array/string" export-name="props"/>
+            <bind name="generateWorkflowStubs" type="boolean" export-name="generateWorkflowStubs"/>
+            <bind name="workflowStubsCategory" type="WorkflowCategory"/>
+            <bind name="findByIdBindingType" type="string" export-name="findByIdBindingType"/>
+            <bind name="findByIdBindingAction" type="Action" export-name="findByIdBindingAction"/>
+            <bind name="findByIdBindingWorkflow" type="Workflow" export-name="findByIdBindingWorkflow"/>
+            <bind name="findAllBindingType" type="string" export-name="findAllBindingType"/>
+            <bind name="findAllBindingAction" type="Action" export-name="findAllBindingAction"/>
+            <bind name="findAllBindingWorkflow" type="Workflow" export-name="findAllBindingWorkflow"/>
+            <bind name="hasChildrenInRelationBindingType" type="string" export-name="hasChildrenInRelationBindingType"/>
+            <bind name="hasChildrenInRelationBindingAction" type="Action" export-name="hasChildrenInRelationBindingAction"/>
+            <bind name="hasChildrenInRelationBindingWorkflow" type="Workflow" export-name="hasChildrenInRelationBindingWorkflow"/>
+            <bind name="findRelationBindingType" type="string" export-name="findRelationBindingType"/>
+            <bind name="findRelationBindingAction" type="Action" export-name="findRelationBindingAction"/>
+            <bind name="findRelationBindingWorkflow" type="Workflow" export-name="findRelationBindingWorkflow"/>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="DynamicTypes:DynamicTypeDefinition" export-name="folderType"/>
+        </out-binding>
+        <position y="55.40909090909091" x="344.5"/>
+    </workflow-item>
+    <workflow-item name="item6" out-name="item7" type="task" comparator="0">
+        <display-name>Set relation name</display-name>
+        <script encoded="false">relationName = typeName + "-" + childType.name; </script>
+        <in-binding>
+            <bind name="childType" type="DynamicTypes:DynamicTypeDefinition" export-name="childType"/>
+            <bind name="typeName" type="string" export-name="typeName"/>
+        </in-binding>
+        <out-binding>
+            <bind name="relationName" type="string" export-name="relationName"/>
+        </out-binding>
+        <position y="55.40909090909091" x="484.5"/>
+    </workflow-item>
+    <workflow-item name="item7" out-name="item3" type="multiple" comparator="0">
+        <display-name>Define Relation</display-name>
+        <in-binding/>
+        <out-binding/>
+        <workflow-subelements-list>
+            <workflow-subelement name="item0" linked-workflow-id="53a325f0-8a2a-4cea-82f6-c73e9e8fa93c">
+                <display-name>Define Relation</display-name>
+                <in-binding>
+                    <bind name="parentType" type="DynamicTypes:DynamicTypeDefinition" export-name="folderType"/>
+                    <bind name="childType" type="DynamicTypes:DynamicTypeDefinition" export-name="childType"/>
+                    <bind name="relationName" type="string" export-name="relationName"/>
+                </in-binding>
+                <out-binding/>
+            </workflow-subelement>
+        </workflow-subelements-list>
+        <position y="55.40909090909091" x="624.5"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item2" type="task" comparator="0">
+        <display-name>Set type name</display-name>
+        <script encoded="false">props.push("isFolder");</script>
+        <in-binding>
+            <bind name="props" type="Array/string" export-name="props"/>
+        </in-binding>
+        <out-binding>
+            <bind name="props" type="Array/string" export-name="props"/>
+        </out-binding>
+        <position y="55.40909090909091" x="204.5"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item0" type="task" comparator="0">
+        <display-name>Set Output</display-name>
+        <script encoded="false">var newFolder = folderType;</script>
+        <in-binding>
+            <bind name="folderType" type="DynamicTypes:DynamicTypeDefinition" export-name="folderType"/>
+        </in-binding>
+        <out-binding>
+            <bind name="newFolder" type="DynamicTypes:DynamicTypeDefinition" export-name="newFolder"/>
+        </out-binding>
+        <position y="55.40909090909091" x="764.5"/>
+    </workflow-item>
+</ns2:workflow>

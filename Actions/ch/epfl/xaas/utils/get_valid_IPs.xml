@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="get_valid_IPs" result-type="string" api-version="6.0.0" id="ccc59cf2-ade4-4059-96b7-aa24e8d8b9f9" version="0.0.0" category-name="ch.epfl.xaas.utils">
+  <description><![CDATA[Checks if the list of IPs is valid. Returns either the comma-separated list of valid IPs or the list of all bad ones.]]></description>
+  <param n="IPs" t="string"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[if (IPs == null || IPs == undefined || IPs.length === 0) {
+    return '';
+}
+
+const OCTET = '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)';      // regexp for octet: 0-255
+const MASK_OCTET = "(254|252|248|240|224|192|128|0)";        // regexp for netmask octet
+const MASK_CIDR = "([1-9]|[12][0-9]|3[0-2])"                 // 1-32 (CIDR mask)
+
+const IP = "(" + OCTET + "\\.){3}" + OCTET                    // IP = 4 octets
+const MASK =                                                 // MASK = ....
+    "("
+    +   "((255\\.){3}" + MASK_OCTET + ")"
+    +  "|((255\\.){2}" + MASK_OCTET + "\\.0)"
+    +  "|((255\\.){1}" + MASK_OCTET + "(\\.0){2})"
+    +  "|(" + MASK_OCTET + "(\.0){3})"
+    + ")"
+
+const IP_REGEX = new RegExp("^" + IP + "$");
+const IP_WITH_MASK_REGEX = new RegExp("^" + IP + "/" + MASK + "$")
+const IP_WITH_CIDR_REGEX = new RegExp("^" + IP + "/" + MASK_CIDR + "$")
+
+System.debug("IP   = " + IP_REGEX);
+System.debug("3 octets vs IP: " + IP_REGEX.test('128.178'))
+// System.debug("MASK = " + MASK);
+// System.debug("MASK_CIDR = " + MASK_CIDR);
+
+function pad8(n) {
+    return (('00000000' + n).slice(-8));
+}
+
+function format2_addr(addr) {
+    octets = addr.split('.');
+    return octets.map(function(octet) { return pad8(parseInt(octet, 10).toString(2)) }).join(' ')
+}
+
+function parseInt10(n) {
+    return parseInt(n, 10);
+}
+
+function cidr_to_mask(cidr) {
+    function to_octet(octet) {
+        return octet < 8 ? ((0xFF << (8 - octet)) & 0xFF): 0xFF;
+    }
+    if (cidr <= 8) {
+        mask = to_octet(cidr) + ".0.0.0";
+    } else if ( cidr <= 16) {
+        mask = "255." + to_octet(cidr - 8) + ".0.0";
+    } else if ( cidr <= 24) {
+        mask = "255." + "255." + to_octet(cidr - 16) + ".0";
+    } else {
+        mask = "255." + "255." + "255." + to_octet(cidr - 24);
+    }
+    return mask;
+}
+
+function apply_mask(ip, mask) {
+    var ip_o = ip.split('.').map(parseInt10);
+    var mask_o = mask.split('.')
+    if (mask_o.length === 1) {
+        mask_o = cidr_to_mask(mask).split('.')
+    }
+    var mask_o = mask_o.map(parseInt10);
+    System.debug(" mask_o = " + mask_o);
+
+    var fixed_ip_o = []
+    for (var i = 0; i < 4; i++) {
+        fixed_ip_o[i] = ip_o[i] & mask_o[i]
+    }
+    // fixed_ip = fixed_ip_o.map(function(o) { return o.toString(10); }).join('.')
+    fixed_ip = fixed_ip_o.map(parseInt10).join('.')
+    System.debug(" apply_mask> fixed = " + fixed_ip + " : " + format2_addr(fixed_ip))
+    if (fixed_ip !== ip) {
+        // return [false, "Error: incorrect IP/Mask '" + ip + "/" + mask + "'. Should be '" + fixed_ip + "/" + mask + "' assuming given mask is correct."]
+        return [false, "Error: incorrect IP/mask. Should be '" + fixed_ip + "/" + mask + "' assuming given mask is correct."]
+    }
+    return [true, '']
+}
+
+
+function check(ip) {
+    System.debug(" ** Checking '" + ip + "'");
+    var result = false;
+    if (IP_REGEX.test(ip)) {
+        System.debug(" ** > Simple IP");
+        return [true, ''];
+    } else if (IP_WITH_MASK_REGEX.test(ip) || IP_WITH_CIDR_REGEX.test(ip)) {
+        System.debug(" ** > IP with mask")
+        tag = ip.split('/')
+        ip = tag[0];
+        mask = tag[1];
+
+        System.debug(" ** > Got: " + ip + "/" + mask);
+        var ip_check = apply_mask(ip, mask);
+        if (ip_check[0])  {
+            System.debug("OK")
+            return [true, '']
+        } else {
+            System.debug(ip_check[1])
+            return [false, ip_check[1]]
+        }
+        // } else if (IP_WITH_CIDR_REGEX.test(ip)) {
+        //     System.debug(" ** > IP with CIDR mask")
+        //     return [true, '']
+    }
+    return [false, 'Error: bad syntax']
+}
+
+
+// trimmed = IPs - removed spaces and newlines
+var trimmed = IPs.replace(/ /g, '')
+System.debug("trimmed = " + trimmed);
+
+// split to list separated by comma
+var IPs_as_list = trimmed.split('\n');
+System.debug("IPs_as_list = " + IPs_as_list);
+
+bad_IPs = []
+result = []
+for each (ip in IPs_as_list) {
+    if (!ip) {
+        continue;
+    }
+    var ipValid = check(ip);
+    if (ipValid[0]) {
+        result.push(ip);
+    } else {
+        bad_IPs.push(ip + ": " + ipValid[1]);
+        result = []
+    }
+}
+
+System.error("\n *** ERRORS ***\n" + bad_IPs.join('\n'));
+
+if (bad_IPs.length > 0) {
+    return 'Error(s) in following IP(s): \n' + bad_IPs.join('\n');
+}
+
+return result.join(',');
+]]></script>
+</dunes-script-module>

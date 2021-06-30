@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="putObjectInCache" result-type="string" api-version="6.0.0" id="ec43a718-9427-4c27-92d5-4f1fec3a49f3" version="1.0.0" allowed-operations="evf" category-name="com.vmware.coe.dynamicTypes">
+  <param n="object" t="Any"><![CDATA[DynamicTypeObject]]></param>
+  <script encoded="false"><![CDATA[var objectId = object.namespace + "." + object.type + "." + object.id;
+System.getModule("com.vmware.coe.dynamicTypes").putInCache(objectId, object);
+return objectId;]]></script>
+</dunes-script-module>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="get_config_resource" result-type="string" api-version="6.0.0" id="0357ac7e-59dc-40e0-b99f-f87e8fe6cc92" version="0.0.0" category-name="ch.epfl.xaas.utils">
+  <param n="config_name" t="string"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[var resourceElementCategory= Server.getResourceElementCategoryWithPath("ch.epfl.config");
+System.log("resourceElementCategory= ["+typeof resourceElementCategory+"]: "+resourceElementCategory.name + ". length= "+resourceElementCategory.resourceElements.length);
+
+for each (var re in resourceElementCategory.resourceElements) {
+    System.log("re.name = " + re.name)
+}
+var resourceElement= resourceElementCategory.resourceElements.filter( 
+	function (re) { return re.name === config_name + ".json"; }
+) [0];
+
+
+var content = resourceElement.getContentAsMimeAttachment().content;
+
+json = JSON.parse(content);
+System.log(JSON.stringify(json, undefined, 2));
+return json;]]></script>
+</dunes-script-module>

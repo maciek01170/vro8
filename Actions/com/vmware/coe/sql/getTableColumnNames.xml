@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getTableColumnNames" result-type="Array/string" api-version="6.0.0" id="717e7b12-4882-43a7-999f-7fc40aeb02da" version="0.0.2" allowed-operations="evf" category-name="com.vmware.coe.sql">
+  <description><![CDATA[Given a SQL:Database and the name of a table, this action will return an Array of strings containing the column names.]]></description>
+  <param n="tableName" t="string"><![CDATA[]]></param>
+  <param n="sqlDb" t="SQL:Database"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[var tables = sqlDb.getTables().filter(function(t) { return t.name === tableName; });
+if (tables && tables.length > 0) {
+    var table = tables[0];
+    System.debug("table = " + table[0]);
+} else {
+    throw "Cannot find table " + tableName;
+}
+
+// modern JS would be: columnNames = table.getColumns().map(x =>  x.name), but is not :-(
+columnNames = table.getColumns().map(function(x) { return  x.name; })
+System.debug(" columnNames.length = " + columnNames.length);
+System.debug(columnNames);
+return columnNames
+]]></script>
+</dunes-script-module>

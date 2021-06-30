@@ -18,7 +18,7 @@
         </param>
         <param name="access" type="string"/>
         <param name="targetTenant" type="string"/>
-        <param name="webdavAccess" type="boolean"/>
+        <param name="webdavAccess" type="string"/>
         <param name="requestor" type="string"/>
         <param name="bgName" type="string"/>
         <param name="volName" type="string"/>
@@ -55,12 +55,15 @@
     <attrib name="errorCode" type="string">
         <value encoded="n"></value>
     </attrib>
+    <attrib name="_webdavAccess_boolean" type="boolean">
+        <value encoded="n">false</value>
+    </attrib>
     <workflow-item name="item0" type="end" end-mode="0" comparator="0">
         <in-binding/>
         <out-binding/>
-        <position y="50.0" x="500.0"/>
+        <position y="50.0" x="530.0"/>
     </workflow-item>
-    <workflow-item name="item1" out-name="item3" catch-name="item2" throw-bind-name="errorCode" type="task" comparator="0">
+    <workflow-item name="item1" out-name="item4" catch-name="item2" throw-bind-name="errorCode" type="task" comparator="0">
         <display-name>check mails</display-name>
         <script encoded="false">var mailValidation = System.getModule("ch.epfl.xaas.utils").check_mails(notificationMail) ;
 if (mailValidation !== '') 
@@ -88,7 +91,7 @@ if (mailValidation !== '')
             <bind name="targetTenant" type="string" export-name="targetTenant">
                 <description>Target NAS tenant (same as vRA)</description>
             </bind>
-            <bind name="webdavAccess" type="boolean" export-name="webdavAccess">
+            <bind name="webdavAccess" type="boolean" export-name="_webdavAccess_boolean">
                 <description>WebDAV access?</description>
             </bind>
             <bind name="deploymentTag" type="string" export-name="deploymentTag">
@@ -130,6 +133,18 @@ if (mailValidation !== '')
             <bind name="volumeOut" type="DynamicTypes:XaasNas.Volume" export-name="volumeOut"/>
         </out-binding>
         <description> </description>
-        <position y="60.0" x="320.0"/>
+        <position y="60.0" x="340.0"/>
+    </workflow-item>
+    <workflow-item name="item4" out-name="item3" type="task" comparator="0">
+        <display-name>convert webDavAcces</display-name>
+        <script encoded="false"></script>
+        <in-binding>
+            <bind name="webdavAccess" type="string" export-name="webdavAccess"/>
+        </in-binding>
+        <out-binding>
+            <bind name="_webdavAccess_boolean" type="boolean" export-name="_webdavAccess_boolean"/>
+        </out-binding>
+        <description>converts webdavAccess input (string) to _webdavAccess_boolean (boolean)</description>
+        <position y="60.0" x="240.0"/>
     </workflow-item>
 </ns2:workflow>

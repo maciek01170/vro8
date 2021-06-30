@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item4" object-name="workflow:name=generic" id="a8d66791-c4ff-41a9-8426-4aa1e0e72b95" editor-version="1.6" version="0.0.1" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Update active record for 'NasVolume'</display-name>
+    <description>Update volume notificationMail in database.</description>
+    <position y="20.0" x="180.0"/>
+    <input>
+        <param name="volume" type="DynamicTypes:XaasNas.Volume"/>
+        <param name="notificationMail" type="string">
+            <description>Notificationmail</description>
+        </param>
+    </input>
+    <output/>
+    <attrib name="errorCode" type="String">
+        <value encoded="n"/>
+        <description>errorCode</description>
+    </attrib>
+    <attrib name="volumeTable" type="SQL:Table" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="volumeTable">
+        <description>Reference to the Table object</description>
+    </attrib>
+    <attrib name="volumeArchiveTable" type="SQL:Table" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="volumeArchiveTable"/>
+    <attrib name="isUnique" type="boolean">
+        <value encoded="n">true</value>
+    </attrib>
+    <attrib name="new_cols" type="Any">
+        <value encoded="n"/>
+        <description>new 'cols' with modifications</description>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="281.77272727272725" x="185.0"/>
+    </workflow-item>
+    <workflow-item name="item1" throw-bind-name="errorCode" type="end" end-mode="1" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="145.4090909090909" x="325.0"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item3" catch-name="item1" throw-bind-name="errorCode" type="task" comparator="0">
+        <display-name>volumeTable</display-name>
+        <script encoded="false">var cols = { volId: volume.id };
+var result = volumeTable.readRecords(cols, true);
+if (result.length &lt; 1)
+    throw "No records found for volId = '" + volume.id + "'";
+else {
+    System.debug(volumeTable.name + ":\n" +JSON.stringify(new_cols, null, 2));
+    result = volumeTable.updateRecord(result[0], new_cols);
+	System.log(result + " record updated from " + volumeTable.name);
+}
+</script>
+        <in-binding>
+            <bind name="volume" type="DynamicTypes:XaasNas.Volume" export-name="volume"/>
+            <bind name="volumeTable" type="SQL:Table" export-name="volumeTable"/>
+            <bind name="isUnique" type="boolean" export-name="isUnique"/>
+            <bind name="new_cols" type="Any" export-name="new_cols"/>
+        </in-binding>
+        <out-binding/>
+        <position y="155.4090909090909" x="145.0"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item0" catch-name="item1" throw-bind-name="errorCode" type="task" comparator="0">
+        <display-name>volumeArchiveTable</display-name>
+        <script encoded="false">var cols = { volId: volume.id };
+var result = volumeArchiveTable.readRecords(cols, true);
+if (result.length &lt; 1)
+    throw "No records found for volId = '" + volume.id + "'";
+else {
+    System.debug(volumeArchiveTable.name + ":\n" +JSON.stringify(new_cols, null, 2));
+    result = volumeArchiveTable.updateRecord(result[0], new_cols);
+	System.log(result + " record updated from " + volumeArchiveTable.name);
+}
+</script>
+        <in-binding>
+            <bind name="volume" type="DynamicTypes:XaasNas.Volume" export-name="volume"/>
+            <bind name="volumeArchiveTable" type="SQL:Table" export-name="volumeArchiveTable"/>
+            <bind name="isUnique" type="boolean" export-name="isUnique"/>
+            <bind name="new_cols" type="Any" export-name="new_cols"/>
+        </in-binding>
+        <out-binding/>
+        <position y="219.04545454545453" x="145.0"/>
+    </workflow-item>
+    <workflow-item name="item4" out-name="item2" type="task" comparator="0">
+        <display-name>set new_cols</display-name>
+        <script encoded="false">System.debug("notificationMail = '" + notificationMail + "'. is_null = " + (notificationMail == null));
+
+new_cols = {};
+System.getModule("ch.epfl.xaas.nas.objects").add_fld_to_cols(new_cols, 'notificationMail', notificationMail);
+</script>
+        <in-binding>
+            <bind name="notificationMail" type="string" export-name="notificationMail"/>
+        </in-binding>
+        <out-binding>
+            <bind name="new_cols" type="Any" export-name="new_cols"/>
+        </out-binding>
+        <position y="91.77272727272727" x="145.0"/>
+    </workflow-item>
+</ns2:workflow>

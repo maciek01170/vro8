@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="add_fld_to_cols" result-type="Any" api-version="6.0.0" id="27dd7d9c-871b-4432-a413-fccda6c8fa38" version="0.0.0" allowed-operations="evf" category-name="ch.epfl.xaas.nas.objects">
+  <description><![CDATA[Add the field with given name and value ensuring the type conversion: if value is a number or boolean, add to cols as is, otherwise (string), add only if not null and empty_allowed or not empty]]></description>
+  <param n="cols" t="Any"><![CDATA[result, can already be filled]]></param>
+  <param n="fld_name" t="string"><![CDATA[field name]]></param>
+  <param n="fld_val" t="Any"><![CDATA[field value]]></param>
+  <param n="empty_allowed" t="boolean"><![CDATA[allows empty strings as values (skipped otherwise). ]]></param>
+  <script encoded="false"><![CDATA[if ((typeof fld_val === 'boolean') || (typeof fld_val === 'number')) {
+	System.debug("Adding field '"+fld_name+"': type = '"+typeof fld_val+"'. value = '"+fld_val+"'");
+    cols[fld_name]= fld_val
+}
+if ((typeof fld_val === 'string') && (empty_allowed || fld_val !== '')) {
+	System.debug("Adding field '"+fld_name+"': type = '"+typeof fld_val+"'. value = '"+fld_val+"'");
+    cols[fld_name]= fld_val;
+}
+return cols;]]></script>
+</dunes-script-module>

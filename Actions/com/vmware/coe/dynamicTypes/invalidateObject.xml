@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="invalidateObject" result-type="void" api-version="6.0.0" id="5f8ec5b5-25f9-44c8-8587-4a04653162e2" version="0.0.1" allowed-operations="evf" category-name="com.vmware.coe.dynamicTypes">
+  <param n="object" t="Any"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[System.log("DynamicTypesManager.invalidate(" + object.namespace+ " , " + object.type+ " , " +object.id + ");");
+DynamicTypesManager.invalidate(object.namespace , object.type , object.id);]]></script>
+</dunes-script-module>

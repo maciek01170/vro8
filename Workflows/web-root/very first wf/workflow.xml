@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="c3d38d3e-5a1a-43b3-8164-f1a88771facf" editor-version="2.0" version="0.0.3" api-version="6.0.0" restartMode="1" resumeFromFailedMode="0">
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item2" object-name="workflow:name=generic" id="c3d38d3e-5a1a-43b3-8164-f1a88771facf" editor-version="2.0" version="0.0.3" api-version="6.0.0" restartMode="1" resumeFromFailedMode="0">
     <display-name>very first wf</display-name>
     <position y="50.0" x="100.0"/>
-    <input/>
+    <input>
+        <param name="Name" type="string"/>
+    </input>
     <output/>
+    <attrib name="localName" type="string">
+        <value encoded="n">titine</value>
+    </attrib>
     <workflow-item name="item0" type="end" end-mode="0" comparator="0">
         <in-binding/>
         <out-binding/>
-        <position y="50.0" x="300.0"/>
+        <position y="50.0" x="400.0"/>
     </workflow-item>
     <workflow-item name="item1" out-name="item0" type="task" comparator="0">
-        <display-name>Scriptable task</display-name>
+        <display-name>JS Action</display-name>
         <script encoded="false">System.debug("Hello, world!");
 System.debug("Very first workflow there.");
-System.debug("And now for 0.0.3...");</script>
-        <in-binding/>
+System.debug("And now for 0.0.3...");
+System.log("Name = " + Name);
+System.log("localName = " + localName);
+</script>
+        <in-binding>
+            <bind name="Name" type="string" export-name=""/>
+            <bind name="localName" type="string" export-name="localName"/>
+        </in-binding>
         <out-binding/>
         <description>Simple task with custom script capability.</description>
-        <position y="60.0" x="160.0"/>
+        <position y="61.82320441988951" x="260.44198895027625"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item1" type="task" comparator="0">
+        <display-name>Python Action</display-name>
+        <runtime>python:3.7</runtime>
+        <script encoded="false">import json
+
+# Name = "toto"
+def handler(context, inputs):
+    jsonOut=json.dumps(inputs, separators=(',', ':'))
+    print("Inputs were {0}".format(jsonOut))
+
+    outputs = {
+      "status": "done"
+    }
+
+    return outputs
+
+print("Name " + Name + "from Python!");
+print("localName " + localName + "from Python!");
+</script>
+        <in-binding>
+            <bind name="Name" type="string"/>
+            <bind name="localName" type="string" export-name="localName"/>
+        </in-binding>
+        <out-binding/>
+        <description>Simple task with custom script capability.</description>
+        <position y="67.34806629834254" x="149.94475138121547"/>
     </workflow-item>
     <presentation/>
 </ns2:workflow>

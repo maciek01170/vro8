@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="putInCache" result-type="void" api-version="6.0.0" id="e89abefe-1129-4223-8167-cb02b44e8ae5" version="1.0.2" allowed-operations="evf" category-name="com.vmware.coe.dynamicTypes">
+  <param n="objectId" t="string"><![CDATA[]]></param>
+  <param n="object" t="Any"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[if (System.getObjectClassName(object) == "DynamicTypesDynamicObjectProxy"){
+	System.error("Object Proxy received instead of actual object!!!");
+	return; // workaround for exception when Proxy object is received instead of actual object.
+}
+DynamicTypesManager.putInCache(objectId, object);
+if (object != "Populating") {
+	System.log("Put in cache object " + objectId + " (" + System.getObjectClassName(object) + ")");
+	DynamicTypesManager.putInCache(objectId + "-timestamp", new Date());
+}
+//else System.log("Set cache to populating for object" + objectId);]]></script>
+</dunes-script-module>

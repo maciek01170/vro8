@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="5aef28ef-443c-4ed9-8649-7b844162d642" editor-version="2.0" version="0.0.0" api-version="6.0.0" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Destroy NAS Volume</display-name>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="volume" type="DynamicTypes:XaasNas.Volume"/>
+    </input>
+    <output/>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="300.0"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item0" type="link" linked-workflow-id="fd13ee23-462a-43a4-9d28-49376803d3b0" comparator="0">
+        <display-name>Delete active record for 'NasVolume'</display-name>
+        <script encoded="false"></script>
+        <in-binding>
+            <bind name="volume" type="DynamicTypes:XaasNas.Volume" export-name="volume"/>
+        </in-binding>
+        <out-binding/>
+        <description> </description>
+        <position y="60.0" x="170.0"/>
+    </workflow-item>
+</ns2:workflow>

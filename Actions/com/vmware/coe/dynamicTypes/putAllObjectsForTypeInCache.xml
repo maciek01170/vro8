@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="putAllObjectsForTypeInCache" result-type="void" api-version="6.0.0" id="318a1900-35a8-4393-812c-85e1124e0226" version="1.0.0" allowed-operations="evf" category-name="com.vmware.coe.dynamicTypes">
+  <param n="type" t="string"><![CDATA[]]></param>
+  <param n="objects" t="Any"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[var cacheIds = new Array();
+
+// Caching each object individually
+for each(var object in objects) {
+	cacheIds.push(System.getModule("com.vmware.coe.dynamicTypes").putObjectInCache(object));
+}
+
+// Caching the list of object ids
+System.getModule("com.vmware.coe.dynamicTypes").putInCache(type + "." + "all", cacheIds);]]></script>
+</dunes-script-module>

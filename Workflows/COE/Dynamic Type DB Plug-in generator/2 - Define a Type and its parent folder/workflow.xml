@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item2" object-name="workflow:name=generic" id="d070302e-21ed-43e6-b2e9-1b6bca133374" editor-version="1.6" version="0.0.5" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>2 - Define a Type and its parent folder</display-name>
+    <description>Create a type and its root / parent folder.
+If the types exist, update its icon &amp; properties</description>
+    <position y="0.0" x="25.0"/>
+    <input>
+        <param name="icon" type="ResourceElement">
+            <description>Resource element image to be used as inventory icon</description>
+        </param>
+        <param name="typeName" type="string">
+            <description>Name of type</description>
+        </param>
+        <param name="namespace" type="DynamicTypes:DynamicNamespaceDefinition">
+            <description>Namespace</description>
+        </param>
+        <param name="idField" type="string">
+            <description>Choose the database column to be used as inventory ID</description>
+        </param>
+        <param name="nameField" type="string">
+            <description>Choose the database column to be used as inventory Name</description>
+        </param>
+        <param name="folderName" type="string">
+            <description>Folder Name</description>
+        </param>
+    </input>
+    <output>
+        <param name="objectType" type="DynamicTypes:DynamicTypeDefinition"/>
+    </output>
+    <attrib name="generateWorkflowStubs" type="boolean">
+        <value encoded="n">false</value>
+    </attrib>
+    <attrib name="workflowStubsCategory" type="WorkflowCategory">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="findByIdBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="findByIdBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='28ad3fb6-751e-4c8b-9766-6b21f64f9397'&amp;dunesName='Action'&amp;name='findById'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="findByIdBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="findAllBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="findAllBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='7957965a-e4be-48f7-80b3-41c1312580c3'&amp;dunesName='Action'&amp;name='findAll'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="findAllBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="hasChildrenInRelationBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="hasChildrenInRelationBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='72edc9ce-aed5-4ccd-b66a-ba68f2f6cf66'&amp;dunesName='Action'&amp;name='hasChildrenInRelation'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="hasChildrenInRelationBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="findRelationBindingType" type="string">
+        <value encoded="n">action</value>
+    </attrib>
+    <attrib name="findRelationBindingAction" type="Action">
+        <value encoded="n">dunes://service.dunes.ch/Action?id='97dd5ba8-76c9-4e95-82a2-b1239f59b749'&amp;dunesName='Action'&amp;name='findRelation'&amp;category='com.vmware.coe.dynamicTypes.sql'</value>
+    </attrib>
+    <attrib name="findRelationBindingWorkflow" type="Workflow">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="typeDefinition" type="DynamicTypes:DynamicTypeDefinition">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="relationName" type="string">
+        <value encoded="n"></value>
+    </attrib>
+    <attrib name="errorCode" type="string">
+        <value encoded="n"></value>
+    </attrib>
+    <attrib name="customPropertyKey" type="string">
+        <value encoded="n">tableName</value>
+        <description>Custom property key</description>
+    </attrib>
+    <attrib name="newFolder" type="DynamicTypes:DynamicTypeDefinition">
+        <value encoded="n"/>
+    </attrib>
+    <attrib name="idFieldCustomPropKey" type="string">
+        <value encoded="n">idField</value>
+    </attrib>
+    <attrib name="nameFieldCustomPropKey" type="string">
+        <value encoded="n">nameField</value>
+    </attrib>
+    <attrib name="props" type="Array/string">
+        <value encoded="n"/>
+        <description>Properties</description>
+    </attrib>
+    <attrib name="parentFolder" type="DynamicTypes:DynamicTypeDefinition">
+        <value encoded="n"/>
+        <description>Parent Folder</description>
+    </attrib>
+    <workflow-item name="item1" out-name="item12" throw-bind-name="errorCode" type="link" linked-workflow-id="52d82b26-4142-44c4-87d6-3d26b2075502" comparator="0">
+        <display-name>Define Type</display-name>
+        <in-binding>
+            <bind name="namespace" type="DynamicTypes:DynamicNamespaceDefinition" export-name="namespace"/>
+            <bind name="typeName" type="string" export-name="typeName"/>
+            <bind name="icon" type="ResourceElement" export-name="icon"/>
+            <bind name="props" type="Array/string" export-name="props"/>
+            <bind name="generateWorkflowStubs" type="boolean" export-name="generateWorkflowStubs"/>
+            <bind name="workflowStubsCategory" type="WorkflowCategory" export-name="workflowStubsCategory"/>
+            <bind name="findByIdBindingType" type="string" export-name="findByIdBindingType"/>
+            <bind name="findByIdBindingAction" type="Action" export-name="findByIdBindingAction"/>
+            <bind name="findByIdBindingWorkflow" type="Workflow" export-name="findByIdBindingWorkflow"/>
+            <bind name="findAllBindingType" type="string" export-name="findAllBindingType"/>
+            <bind name="findAllBindingAction" type="Action" export-name="findAllBindingAction"/>
+            <bind name="findAllBindingWorkflow" type="Workflow" export-name="findAllBindingWorkflow"/>
+            <bind name="hasChildrenInRelationBindingType" type="string" export-name="hasChildrenInRelationBindingType"/>
+            <bind name="hasChildrenInRelationBindingAction" type="Action" export-name="hasChildrenInRelationBindingAction"/>
+            <bind name="hasChildrenInRelationBindingWorkflow" type="Workflow" export-name="hasChildrenInRelationBindingWorkflow"/>
+            <bind name="findRelationBindingType" type="string" export-name="findRelationBindingType"/>
+            <bind name="findRelationBindingAction" type="Action" export-name="findRelationBindingAction"/>
+            <bind name="findRelationBindingWorkflow" type="Workflow" export-name="findRelationBindingWorkflow"/>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+        </out-binding>
+        <position y="9.954545454545453" x="504.5"/>
+    </workflow-item>
+    <workflow-item name="item6" out-name="item10" alt-out-name="item8" type="condition" comparator="0">
+        <display-name>Parent folder ?</display-name>
+        <script encoded="false">// Generated by the system, cannot be edited
+return (parentFolder !== null);</script>
+        <in-binding>
+            <bind name="parentFolder" type="DynamicTypes:DynamicTypeDefinition" export-name="parentFolder"/>
+        </in-binding>
+        <out-binding/>
+        <condition name="parentFolder" type="DynamicTypes:DynamicTypeDefinition" comparator="0" label="null"></condition>
+        <position y="0.0" x="984.5"/>
+    </workflow-item>
+    <workflow-item name="item8" out-name="item13" throw-bind-name="errorCode" type="link" linked-workflow-id="ca57483e-7a3b-4934-9f81-1fa46ab61ffd" comparator="0">
+        <display-name>Define root db folder</display-name>
+        <in-binding>
+            <bind name="childType" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+            <bind name="namespace" type="DynamicTypes:DynamicNamespaceDefinition" export-name="namespace"/>
+            <bind name="typeName" type="string" export-name="folderName"/>
+        </in-binding>
+        <out-binding>
+            <bind name="newFolder" type="DynamicTypes:DynamicTypeDefinition" export-name="newFolder"/>
+        </out-binding>
+        <description>Create 1 relation + 1 object definition
+</description>
+        <position y="9.954545454545453" x="1104.5"/>
+    </workflow-item>
+    <workflow-item name="item9" out-name="item11" throw-bind-name="errorCode" type="link" linked-workflow-id="53a325f0-8a2a-4cea-82f6-c73e9e8fa93c" comparator="0">
+        <display-name>Define Relation</display-name>
+        <in-binding>
+            <bind name="parentType" type="DynamicTypes:DynamicTypeDefinition" export-name="parentFolder"/>
+            <bind name="childType" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+            <bind name="relationName" type="string" export-name="relationName"/>
+        </in-binding>
+        <out-binding/>
+        <position y="73.59090909090908" x="1344.5"/>
+    </workflow-item>
+    <workflow-item name="item10" out-name="item9" type="task" comparator="0">
+        <display-name>Set relationName</display-name>
+        <script encoded="false">relationName = parentFolder.name + "-" + typeDefinition.name;</script>
+        <in-binding>
+            <bind name="parentFolder" type="DynamicTypes:DynamicTypeDefinition" export-name="parentFolder"/>
+            <bind name="typeDefinition" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+        </in-binding>
+        <out-binding>
+            <bind name="relationName" type="string" export-name="relationName"/>
+        </out-binding>
+        <position y="73.59090909090908" x="984.5"/>
+    </workflow-item>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="0.45454545454545325" x="1504.5"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item18" type="task" script-module="com.vmware.coe.dynamicTypes/getTypeDefinitionByName" comparator="0">
+        <display-name>getTypeDefinitionByName</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.coe.dynamicTypes").getTypeDefinitionByName(namespace,typeName) ;</script>
+        <in-binding>
+            <bind name="namespace" type="DynamicTypes:DynamicNamespaceDefinition" export-name="namespace"/>
+            <bind name="typeName" type="string" export-name="typeName"/>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+        </out-binding>
+        <position y="9.954545454545453" x="105.0"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item4" alt-out-name="item1" type="condition" comparator="0">
+        <display-name>Type exist ?</display-name>
+        <script encoded="false">// Generated by the system, cannot be edited
+return (typeDefinition !== null);</script>
+        <in-binding>
+            <bind name="typeDefinition" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+        </in-binding>
+        <out-binding/>
+        <condition name="typeDefinition" type="DynamicTypes:DynamicTypeDefinition" comparator="0" label="null"></condition>
+        <position y="0.0" x="384.5"/>
+    </workflow-item>
+    <workflow-item name="item4" out-name="item7" type="link" linked-workflow-id="691b2020-20d0-469a-9be3-a57937266c6a" comparator="0">
+        <display-name>Update Type</display-name>
+        <in-binding>
+            <bind name="type" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+            <bind name="newNamespace" type="DynamicTypes:DynamicNamespaceDefinition" export-name="namespace"/>
+            <bind name="newType" type="string" export-name="typeName"/>
+            <bind name="newIcon" type="ResourceElement" export-name="icon"/>
+            <bind name="newProperties" type="Array/string" export-name="props"/>
+        </in-binding>
+        <out-binding>
+            <bind name="result" type="DynamicTypes:DynamicTypeDefinition" export-name="objectType"/>
+        </out-binding>
+        <position y="73.59090909090908" x="504.5"/>
+    </workflow-item>
+    <workflow-item name="item5" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="118.13636363636363" x="904.5"/>
+    </workflow-item>
+    <workflow-item name="item11" out-name="item0" type="task" comparator="0">
+        <display-name>Set output</display-name>
+        <script encoded="false">objectType = typeDefinition;</script>
+        <in-binding>
+            <bind name="typeDefinition" type="DynamicTypes:DynamicTypeDefinition" export-name="typeDefinition"/>
+        </in-binding>
+        <out-binding>
+            <bind name="objectType" type="DynamicTypes:DynamicTypeDefinition" export-name="objectType"/>
+        </out-binding>
+        <position y="9.954545454545453" x="1344.5"/>
+    </workflow-item>
+    <workflow-item name="item7" out-name="item14" type="task" script-module="com.vmware.library.customProperties/setCustomProperty" comparator="0">
+        <display-name>setCustomProperty</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("com.vmware.library.customProperties").setCustomProperty(object,key,value) ;</script>
+        <in-binding>
+            <bind name="object" type="Any" export-name="typeDefinition">
+                <description>Object to which affect the custome property</description>
+            </bind>
+            <bind name="key" type="string" export-name="customPropertyKey">
+                <description>Custom property key</description>
+            </bind>
+            <bind name="value" type="string" export-name="folderName">
+                <description>Custom property value</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Set a custom property on an object</description>
+        <position y="73.59090909090908" x="624.5"/>
+    </workflow-item>
+    <workflow-item name="item12" out-name="item16" type="task" script-module="com.vmware.library.customProperties/setCustomProperty" comparator="0">
+        <display-name>setCustomProperty</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("com.vmware.library.customProperties").setCustomProperty(object,key,value) ;</script>
+        <in-binding>
+            <bind name="object" type="Any" export-name="typeDefinition">
+                <description>Object to which affect the custome property</description>
+            </bind>
+            <bind name="key" type="string" export-name="customPropertyKey">
+                <description>Custom property key</description>
+            </bind>
+            <bind name="value" type="string" export-name="folderName">
+                <description>Custom property value</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Set a custom property on an object</description>
+        <position y="9.954545454545453" x="624.5"/>
+    </workflow-item>
+    <workflow-item name="item13" out-name="item11" type="task" script-module="com.vmware.library.customProperties/setCustomProperty" comparator="0">
+        <display-name>setCustomProperty</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("com.vmware.library.customProperties").setCustomProperty(object,key,value) ;</script>
+        <in-binding>
+            <bind name="object" type="Any" export-name="newFolder">
+                <description>Object to which affect the custome property</description>
+            </bind>
+            <bind name="key" type="string" export-name="customPropertyKey">
+                <description>Custom property key</description>
+            </bind>
+            <bind name="value" type="string" export-name="folderName">
+                <description>Custom property value</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Set a custom property on an object</description>
+        <position y="9.954545454545453" x="1224.5"/>
+    </workflow-item>
+    <workflow-item name="item14" out-name="item15" type="task" script-module="com.vmware.library.customProperties/setCustomProperty" comparator="0">
+        <display-name>setCustomProperty</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("com.vmware.library.customProperties").setCustomProperty(object,key,value) ;</script>
+        <in-binding>
+            <bind name="object" type="Any" export-name="typeDefinition">
+                <description>Object to which affect the custome property</description>
+            </bind>
+            <bind name="key" type="string" export-name="idFieldCustomPropKey">
+                <description>Custom property key</description>
+            </bind>
+            <bind name="value" type="string" export-name="idField">
+                <description>Custom property value</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Set a custom property on an object</description>
+        <position y="73.59090909090908" x="744.5"/>
+    </workflow-item>
+    <workflow-item name="item15" out-name="item5" type="task" script-module="com.vmware.library.customProperties/setCustomProperty" comparator="0">
+        <display-name>setCustomProperty</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("com.vmware.library.customProperties").setCustomProperty(object,key,value) ;</script>
+        <in-binding>
+            <bind name="object" type="Any" export-name="typeDefinition">
+                <description>Object to which affect the custome property</description>
+            </bind>
+            <bind name="key" type="string" export-name="nameFieldCustomPropKey">
+                <description>Custom property key</description>
+            </bind>
+            <bind name="value" type="string" export-name="nameField">
+                <description>Custom property value</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Set a custom property on an object</description>
+        <position y="73.59090909090908" x="864.5"/>
+    </workflow-item>
+    <workflow-item name="item16" out-name="item17" type="task" script-module="com.vmware.library.customProperties/setCustomProperty" comparator="0">
+        <display-name>setCustomProperty</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("com.vmware.library.customProperties").setCustomProperty(object,key,value) ;</script>
+        <in-binding>
+            <bind name="object" type="Any" export-name="typeDefinition">
+                <description>Object to which affect the custome property</description>
+            </bind>
+            <bind name="key" type="string" export-name="idFieldCustomPropKey">
+                <description>Custom property key</description>
+            </bind>
+            <bind name="value" type="string" export-name="idField">
+                <description>Custom property value</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Set a custom property on an object</description>
+        <position y="9.954545454545453" x="744.5"/>
+    </workflow-item>
+    <workflow-item name="item17" out-name="item6" type="task" script-module="com.vmware.library.customProperties/setCustomProperty" comparator="0">
+        <display-name>setCustomProperty</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+System.getModule("com.vmware.library.customProperties").setCustomProperty(object,key,value) ;</script>
+        <in-binding>
+            <bind name="object" type="Any" export-name="typeDefinition">
+                <description>Object to which affect the custome property</description>
+            </bind>
+            <bind name="key" type="string" export-name="nameFieldCustomPropKey">
+                <description>Custom property key</description>
+            </bind>
+            <bind name="value" type="string" export-name="nameField">
+                <description>Custom property value</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description>Set a custom property on an object</description>
+        <position y="9.954545454545453" x="864.5"/>
+    </workflow-item>
+    <workflow-item name="item18" out-name="item3" type="task" comparator="0">
+        <display-name>Prepare Props</display-name>
+        <script encoded="false">var columns = System.getModule("com.vmware.coe.dynamicTypes.sql").getAllTableColumnNamesForNamespaceDb(namespace,folderName);
+System.debug("Column count: "+columns.length);
+var props = new Array("id","name");
+for each (c in columns){
+	if (c != idField &amp;&amp; c != nameField) props.push(c);
+}
+System.debug("Props Count: "+props.length);
+System.debug("Type Definition Properties: "+props);</script>
+        <in-binding>
+            <bind name="namespace" type="DynamicTypes:DynamicNamespaceDefinition" export-name="namespace"/>
+            <bind name="idField" type="string" export-name="idField"/>
+            <bind name="nameField" type="string" export-name="nameField"/>
+            <bind name="folderName" type="string" export-name="folderName"/>
+        </in-binding>
+        <out-binding>
+            <bind name="props" type="Array/string" export-name="props"/>
+        </out-binding>
+        <position y="9.954545454545453" x="245.5"/>
+    </workflow-item>
+    <workflow-note x="596.5" y="751.7272727272726" w="137.0" h="174.0">
+        <description>Check if type exist. If it does update it</description>
+    </workflow-note>
+    <workflow-note x="540.0" y="40.590909090909086" w="380.0" h="37.0">
+        <description>Set Custom Properties on DynamicTypeDefinition:
+folderName - Database table name
+idField - Database table column to be used for Inventory ID
+nameField - Database table column to be used for Inventory Name</description>
+    </workflow-note>
+</ns2:workflow>

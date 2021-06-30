@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="7475a995-7925-416a-80ea-89cfb876e487" editor-version="2.0" version="0.0.0" api-version="6.0.0" restartMode="1" resumeFromFailedMode="0">
+    <display-name>test Dynamic Type</display-name>
+    <position y="50.0" x="100.0"/>
+    <input/>
+    <output>
+        <param name="object" type="Any"/>
+    </output>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="300.0"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item0" type="task" comparator="0">
+        <display-name>Scriptable task</display-name>
+        <script encoded="false">object = DynamicTypesManager.getObject('XaasNas', 'Volume', '336aec91-a368-11eb-8144-00a0b8c40fd1')</script>
+        <in-binding/>
+        <out-binding>
+            <bind name="object" type="Any" export-name="object"/>
+        </out-binding>
+        <description>Simple task with custom script capability.</description>
+        <position y="60.0" x="180.0"/>
+    </workflow-item>
+</ns2:workflow>

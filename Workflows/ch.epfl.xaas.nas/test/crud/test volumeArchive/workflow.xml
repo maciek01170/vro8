@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item2" object-name="workflow:name=generic" id="c69a33dd-0402-4833-ad6c-9c0c7f26eb52" editor-version="1.6" version="0.0.0" api-version="6.0.0" allowed-operations="vfe" restartMode="1" resumeFromFailedMode="0">
+    <display-name>test volumeArchive</display-name>
+    <position y="50.0" x="100.0"/>
+    <input/>
+    <output/>
+    <attrib name="volumeArchiveTable" type="SQL:Table" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="volumeArchiveTable"/>
+    <attrib name="isUnique" type="boolean">
+        <value encoded="n">true</value>
+    </attrib>
+    <attrib name="cols" type="Any">
+        <value encoded="n"/>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="45.40909090909091" x="524.5"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item0" type="task" comparator="0">
+        <display-name>insert!</display-name>
+        <script encoded="false">
+System.debug("cols = "+JSON.stringify(cols, null, 2));
+System.debug("Creating volume '" + cols.volName + "'("+ cols.volId + ") in "+volumeArchiveTable.name);
+
+volumeArchiveTable.createRecord(cols, isUnique);
+System.debug("Created volume '" + cols.volName + "'("+ cols.volId + ") in "+volumeArchiveTable.name);
+</script>
+        <in-binding>
+            <bind name="volumeArchiveTable" type="SQL:Table" export-name="volumeArchiveTable"/>
+            <bind name="isUnique" type="boolean" export-name="isUnique"/>
+            <bind name="cols" type="Any" export-name="cols"/>
+        </in-binding>
+        <out-binding/>
+        <position y="55.40909090909091" x="344.5"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item1" type="task" comparator="0">
+        <display-name>fill cols</display-name>
+        <script encoded="false">var cols = {
+  "volType": "col",
+  "volId": "8c412603-3a2f-11eb-8144-00a0b8c40fd1-03",
+  "volName": "u13033_si_exapp_2_files",
+  "access": "cifs",
+  "svm": "nas-mcc-t-test",
+  "targetEnv": "test",
+  "targetTenant": "EPFL",
+  "webdavAccess": false,
+  "backupPlan": "",
+  "deploymentTag": "Test",
+  "requestor": "macowicz@intranet.epfl.ch",
+  "notificationMail": "maciej.macowicz@epfl.ch",
+  "reasonsForRequest": "Test with bgID",
+  "createdOn": new Date(),
+  "bgName": "epfl_si_exapp",
+  "bgId": "13033",
+  "crit1": "epfl",
+  "crit2": "si",
+  "crit3": "exapp"
+}</script>
+        <in-binding/>
+        <out-binding>
+            <bind name="cols" type="Any" export-name="cols"/>
+        </out-binding>
+        <position y="55.40909090909091" x="204.5"/>
+    </workflow-item>
+</ns2:workflow>

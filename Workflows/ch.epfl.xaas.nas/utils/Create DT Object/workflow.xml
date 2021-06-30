@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item5" object-name="workflow:name=generic" id="1bc9b0ae-2a97-492d-b6b2-cc03d2f3c15a" editor-version="1.6" version="0.0.0" api-version="6.0.0" allowed-operations="evf" restartMode="1" resumeFromFailedMode="0">
+    <display-name>Create DT Object</display-name>
+    <description>Creates DynamicTypes:XaasNas.Volume object from given inputs.</description>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="access" type="string">
+            <description>Access protocol</description>
+        </param>
+        <param name="targetTenant" type="string">
+            <description>Target NAS tenant (same as vRA)</description>
+        </param>
+        <param name="webdavAccess" type="boolean">
+            <description>WebDAV access?</description>
+        </param>
+        <param name="deploymentTag" type="string">
+            <description>Environment</description>
+        </param>
+        <param name="requestor" type="string">
+            <description>Requestor</description>
+        </param>
+        <param name="notificationMail" type="string">
+            <description>Notification mail</description>
+        </param>
+        <param name="reasonsForRequest" type="string">
+            <description>Reason for request</description>
+        </param>
+        <param name="bgName" type="string">
+            <description>Business group</description>
+        </param>
+        <param name="bgId" type="string"/>
+        <param name="svm" type="string">
+            <description>vServer</description>
+        </param>
+        <param name="volId" type="string">
+            <description>volume Id required for handling DT</description>
+        </param>
+        <param name="volName" type="string">
+            <description>Volume name returned by PS1</description>
+        </param>
+        <param name="targetEnv" type="string">
+            <description>Target NAS env.</description>
+        </param>
+        <param name="volType" type="string">
+            <description>Volume type: fixed to 'col' here</description>
+        </param>
+        <param name="backupPlan" type="string">
+            <description>Backup plan (placeholder)</description>
+        </param>
+    </input>
+    <output>
+        <param name="volumeOut" type="DynamicTypes:XaasNas.Volume"/>
+    </output>
+    <attrib name="newRecord" type="SQL:ActiveRecord">
+        <value encoded="n"/>
+        <description>Mapped record object to a database record.</description>
+    </attrib>
+    <attrib name="newVolume" type="DynamicTypes:XaasNas.Volume">
+        <value encoded="n"/>
+        <description>new DT object for volume</description>
+    </attrib>
+    <attrib name="parentFolder" type="Any">
+        <value encoded="n"/>
+        <description>required for refreshing DTs</description>
+    </attrib>
+    <attrib name="dtObjectType" type="string" conf-id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" conf-key="dtObjectType"/>
+    <attrib name="createdOn" type="Date">
+        <value encoded="n"/>
+        <description>Created on</description>
+    </attrib>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="45.40909090909091" x="984.5"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item2" type="link" linked-workflow-id="e3b2fee5-6ba6-4594-a2b3-463dc2361cae" comparator="0">
+        <display-name>Create active record for 'NasVolume'</display-name>
+        <in-binding>
+            <bind name="access" type="string" export-name="access"/>
+            <bind name="backupPlan" type="string" export-name="backupPlan">
+                <description>Backupplan</description>
+            </bind>
+            <bind name="bgName" type="string" export-name="bgName">
+                <description>Bgname</description>
+            </bind>
+            <bind name="createdOn" type="Date" export-name="createdOn">
+                <description>Createdon</description>
+            </bind>
+            <bind name="deploymentTag" type="string" export-name="deploymentTag">
+                <description>Deploymenttag</description>
+            </bind>
+            <bind name="notificationMail" type="string" export-name="notificationMail">
+                <description>Notificationmail</description>
+            </bind>
+            <bind name="reasonsForRequest" type="string" export-name="reasonsForRequest">
+                <description>Reasonsforrequest</description>
+            </bind>
+            <bind name="requestor" type="string" export-name="requestor">
+                <description>Requestor</description>
+            </bind>
+            <bind name="svm" type="string" export-name="svm"/>
+            <bind name="targetEnv" type="string" export-name="targetEnv">
+                <description>Targetenv</description>
+            </bind>
+            <bind name="targetTenant" type="string" export-name="targetTenant">
+                <description>Targettenant</description>
+            </bind>
+            <bind name="volId" type="string" export-name="volId"/>
+            <bind name="volName" type="string" export-name="volName">
+                <description>Volname</description>
+            </bind>
+            <bind name="volType" type="string" export-name="volType">
+                <description>Voltype</description>
+            </bind>
+            <bind name="webdavAccess" type="boolean" export-name="webdavAccess">
+                <description>Webdavaccess</description>
+            </bind>
+            <bind name="bgId" type="string" export-name="bgId"/>
+        </in-binding>
+        <out-binding>
+            <bind name="result" type="SQL:ActiveRecord" export-name="newRecord">
+                <description>Mapped record object to a database record.</description>
+            </bind>
+        </out-binding>
+        <description>Autogenerated workflow that creates records.</description>
+        <position y="55.40909090909091" x="344.5"/>
+    </workflow-item>
+    <workflow-item name="item2" out-name="item3" type="task" script-module="com.vmware.coe.dynamicTypes.sql/getDbObject" comparator="0">
+        <display-name>getDbObject</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.coe.dynamicTypes.sql").getDbObject(type,objectId);
+</script>
+        <in-binding>
+            <bind name="type" type="string" export-name="dtObjectType">
+                <description>Type of object to retrieve in format Namespace.class</description>
+            </bind>
+            <bind name="objectId" type="string" export-name="volId"/>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="DynamicTypes:XaasNas.Volume" export-name="newVolume"/>
+        </out-binding>
+        <position y="55.40909090909091" x="464.5"/>
+    </workflow-item>
+    <workflow-item name="item3" out-name="item4" type="task" script-module="com.vmware.coe.dynamicTypes.sql/getParentObject" comparator="0">
+        <display-name>getParentObject</display-name>
+        <script encoded="false">//Auto generated script, cannot be modified !
+actionResult = System.getModule("com.vmware.coe.dynamicTypes.sql").getParentObject(object);
+</script>
+        <in-binding>
+            <bind name="object" type="DynamicTypes:XaasNas.Volume" export-name="newVolume">
+                <description>Object to get parent of</description>
+            </bind>
+        </in-binding>
+        <out-binding>
+            <bind name="actionResult" type="Any" export-name="parentFolder"/>
+        </out-binding>
+        <description>Get the parent object of a given object. Slow since it has to get all the parent objects and search for a matching children</description>
+        <position y="55.40909090909091" x="584.5"/>
+    </workflow-item>
+    <workflow-item name="item4" out-name="item0" type="task" comparator="0">
+        <display-name>Map output</display-name>
+        <script encoded="false">volumeOut = newVolume;</script>
+        <in-binding>
+            <bind name="newVolume" type="DynamicTypes:XaasNas.Volume" export-name="newVolume"/>
+        </in-binding>
+        <out-binding>
+            <bind name="volumeOut" type="DynamicTypes:XaasNas.Volume" export-name="volumeOut"/>
+        </out-binding>
+        <position y="55.40909090909091" x="764.5"/>
+    </workflow-item>
+    <workflow-item name="item5" out-name="item1" type="task" business-status="create DB and DT object" comparator="0">
+        <display-name>Set createdOn</display-name>
+        <script encoded="false">createdOn = new Date();</script>
+        <in-binding/>
+        <out-binding>
+            <bind name="createdOn" type="Date" export-name="createdOn"/>
+        </out-binding>
+        <position y="55.40909090909091" x="224.5"/>
+    </workflow-item>
+    <workflow-note x="220.0" y="44.45454545454545" w="700.0" h="57.0">
+        <description>Create object either in DB and DT</description>
+    </workflow-note>
+</ns2:workflow>

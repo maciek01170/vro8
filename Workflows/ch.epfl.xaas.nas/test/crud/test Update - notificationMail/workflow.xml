@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:workflow xmlns:ns2="http://vmware.com/vco/workflow" root-name="item1" object-name="workflow:name=generic" id="98ec8819-d41b-43fd-a13a-2ef7ea056430" editor-version="1.6" version="0.0.0" api-version="6.0.0" allowed-operations="vfe" restartMode="1" resumeFromFailedMode="0">
+    <display-name>test Update - notificationMail</display-name>
+    <position y="50.0" x="100.0"/>
+    <input>
+        <param name="volume" type="DynamicTypes:XaasNas.Volume"/>
+        <param name="notificationMail" type="string">
+            <description>Notificationmail</description>
+        </param>
+    </input>
+    <output/>
+    <workflow-item name="item0" type="end" end-mode="0" comparator="0">
+        <in-binding/>
+        <out-binding/>
+        <position y="50.0" x="380.0"/>
+    </workflow-item>
+    <workflow-item name="item1" out-name="item0" type="link" linked-workflow-id="a8d66791-c4ff-41a9-8426-4aa1e0e72b95" comparator="0">
+        <display-name>Update active record for 'NasVolume'</display-name>
+        <script encoded="false"></script>
+        <in-binding>
+            <bind name="volume" type="DynamicTypes:XaasNas.Volume" export-name="volume"/>
+            <bind name="notificationMail" type="string" export-name="notificationMail">
+                <description>Notificationmail</description>
+            </bind>
+        </in-binding>
+        <out-binding/>
+        <description> </description>
+        <position y="60.0" x="200.0"/>
+    </workflow-item>
+</ns2:workflow>

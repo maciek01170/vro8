@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<config-element id="f82ad97a-cc4f-40e5-966a-b389e1ab21f7" version="1.2.0">
+  <display-name><![CDATA[XaasNasConfig]]></display-name>
+  <description><![CDATA[XaaS NAS parameters
+1.2.0 2020-10-08: Initial version (copied from S3XaasConfig).]]></description>
+  <atts>
+    <att name="database" type="SQL:Database" read-only="false">
+      <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='99fa06d7-b378-4c27-b8c7-0cd36bc146f5'&dunesName='SQL:Database']]></value>
+      <description><![CDATA[XaasNas database]]></description>
+    </att>
+    <att name="volumeTable" type="SQL:Table" read-only="false">
+      <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='99fa06d7-b378-4c27-b8c7-0cd36bc146f5@v8_NasVolume'&dunesName='SQL:Table']]></value>
+      <description><![CDATA[NAS Volume  table]]></description>
+    </att>
+    <att name="ps1Host" type="PowerShell:PowerShellHost" read-only="false">
+      <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='33054ea0-e29f-4ff3-a58a-c3d85e7cadae'&dunesName='PowerShell:PowerShellHost']]></value>
+      <description><![CDATA[Powershell proxy]]></description>
+    </att>
+    <att name="scriptName" type="string" read-only="false">
+      <value encoded="n"><![CDATA[C:\Scripts\git\xaas-admin\powershell\xaas-nas-endpoint.ps1]]></value>
+      <description><![CDATA[xaas backup script name]]></description>
+    </att>
+    <att name="targetEnv" type="string" read-only="false">
+      <value encoded="n"><![CDATA[test]]></value>
+      <description><![CDATA[target tenants ->PS1-> ONTAP]]></description>
+    </att>
+    <att name="dtObjectType" type="string" read-only="false">
+      <value encoded="n"><![CDATA[XaasNas.Volume]]></value>
+      <description><![CDATA[NAS Volume Dynamic Type name]]></description>
+    </att>
+    <att name="fromAddress" type="string" read-only="false">
+      <value encoded="n"><![CDATA[noreply+xaas-nas@epfl.ch]]></value>
+      <description><![CDATA[fromAddress for sending mails]]></description>
+    </att>
+    <att name="ccAddress" type="string" read-only="false">
+      <value encoded="n"><![CDATA[maciej.macowicz@epfl.ch]]></value>
+      <description><![CDATA[ccAddress for sending mails]]></description>
+    </att>
+    <att name="volumeArchiveTable" type="SQL:Table" read-only="false">
+      <value encoded="n"><![CDATA[dunes://service.dunes.ch/CustomSDKObject?id='99fa06d7-b378-4c27-b8c7-0cd36bc146f5@v8_NasVolumeArchive'&dunesName='SQL:Table']]></value>
+      <description><![CDATA[NAS Volume Archive table]]></description>
+    </att>
+    <att name="targetTenants" type="Array/string" read-only="false">
+      <value encoded="n"><![CDATA[[11:string#epfl,17:string#itservices]]]></value>
+      <description><![CDATA[target tenants ->PS1-> ONTAP]]></description>
+    </att>
+    <att name="accessType" type="Array/string" read-only="false">
+      <value encoded="n"><![CDATA[[11:string#cifs,11:string#nfs3]]]></value>
+    </att>
+    <att name="volumeUsage_tableName" type="string" read-only="false">
+      <value encoded="n"><![CDATA[NasVolumeUsage]]></value>
+    </att>
+    <att name="volumeUsage_tenants" type="Array/string" read-only="false">
+      <value encoded="n"><![CDATA[[11:string#epfl,17:string#itservices]]]></value>
+    </att>
+    <att name="cacheResouceFolder" type="ResourceElementCategory" read-only="false">
+      <value encoded="n"><![CDATA[dunes://service.dunes.ch/ResourceElementCategory?id='ff808081759e42a70175d127ef4f0410'&dunesName='ResourceElementCategory']]></value>
+    </att>
+    <att name="cacheMaxAge" type="number" read-only="false">
+      <value encoded="n"><![CDATA[300.0]]></value>
+      <description><![CDATA[seconds]]></description>
+    </att>
+  </atts>
+</config-element>
